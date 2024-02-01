@@ -65,12 +65,13 @@ export function importEntryRawFile<C extends CollectionKey>(
 
 export function parseFrontmatter<S extends TAnySchema>(
 	schema: S,
-	fileContent: string
+	fileData: FileData
 ): Maybe.Maybe<Static<S>> {
 	try {
-		const frontmatterData = fm(fileContent).attributes;
+		const frontmatterData = fm(fileData.content).attributes;
 		return Value.Encode(schema, frontmatterData);
 	} catch (e) {
+		console.log(`Failed to parse: ${fileData.path}`);
 		return undefined;
 	}
 }
@@ -80,7 +81,7 @@ export async function processEntryRawFile<S extends TAnySchema>(
 	rawFile: RawFile
 ): Promise<Maybe.Maybe<Static<S>>> {
 	const entryFileData = await Maybe.runAsync(rawFile, readRawFile);
-	const entryData = Maybe.run(entryFileData, (v) => parseFrontmatter(schema, v.content));
+	const entryData = Maybe.run(entryFileData, (v) => parseFrontmatter(schema, v));
 	return entryData;
 }
 
