@@ -1,6 +1,5 @@
 <script lang="ts">
 	import Comp from './comp.svelte';
-	import { Value } from '@sinclair/typebox/value';
 
 	export let data;
 	let { organizations } = data;
