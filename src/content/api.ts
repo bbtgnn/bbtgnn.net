@@ -29,9 +29,11 @@ export async function getCollection<T extends CollectionKey>(
 
 	const fileData = fileContents
 		.map((content) => fm(content).attributes)
-		.map((data, i) => _.set(data, 'id', collectionEntries[i][0]))
+		.map((data, i) => _.set(data as Record<string, unknown>, 'id', collectionEntries[i][0]))
 		.map((data, i) => _.set(data, 'markdown', fileContents[i]))
 		.filter((data) => Value.Check(collectionSchema, data));
 
 	return fileData as CollectionType<T>[];
 }
+
+// TODO - List invalid files and the reason why
