@@ -4,8 +4,8 @@ organization:
   collection: organizations
   records:
     - sos
-date_start: 2020-10-24
-date_end: 2020-10-25
+date_start: '2020-10-24'
+date_end: '2020-10-25'
 days: 2
 hours: 16
 links:
