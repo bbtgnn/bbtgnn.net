@@ -1,5 +1,5 @@
 import { Type as T, type TSchema } from '@sinclair/typebox';
-import { type CollectionID } from './config';
+import { type Collection } from './config';
 
 // TODO - Valutare l'utilizzo di Effect.Schema
 
@@ -17,7 +17,7 @@ export const Links = () => T.Object({ links: T.Optional(T.Array(T.String({ forma
 
 export const Markdown = () => T.Object({ markdown: T.String() });
 
-export const Relation = (collection: CollectionID) =>
+export const Relation = (collection: Collection) =>
 	T.Object({
 		collection: T.Literal(collection),
 		records: T.Array(ID())

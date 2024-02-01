@@ -3,17 +3,7 @@ import * as F from './fields';
 
 //
 
-// export const collectionID = {
-// 	Organizations: 'organizations',
-// 	Projects: 'projects',
-// 	Workshops: 'workshops',
-// 	LearningExperiences: 'experiences_learning',
-// 	WorkExperiences: 'experiences_work'
-// } as const;
-
-// export type CollectionID = (typeof collectionID)[keyof typeof collectionID];
-
-export enum CollectionID {
+export enum Collection {
 	Organizations = 'organizations',
 	Workshops = 'workshops',
 	LearningExperiences = 'experiences_learning',
@@ -24,40 +14,33 @@ export enum CollectionID {
 
 export const Collections = {
 	organizations: T.Intersect([
-		F.ID(),
 		T.Object({
 			name: T.String()
 		}),
 		F.LocationString(),
-		F.Links(),
-		F.Markdown()
+		F.Links()
 	]),
 
 	experiences_work: T.Intersect([
-		F.ID(),
 		T.Object({
-			employer: F.Relation(CollectionID.Organizations),
+			employer: F.Relation(Collection.Organizations),
 			roles: T.Array(T.String())
 		}),
-		F.DateSpan(),
-		F.Markdown()
+		F.DateSpan()
 	]),
 
 	experiences_learning: T.Intersect([
-		F.ID(),
 		T.Object({
 			title: T.String(),
-			institution: F.Relation(CollectionID.Organizations)
+			institution: F.Relation(Collection.Organizations)
 		}),
-		F.DateSpan(),
-		F.Markdown()
+		F.DateSpan()
 	]),
 
 	workshops: T.Intersect([
-		F.ID(),
 		T.Object({
 			title: T.String(),
-			organization: F.Relation(CollectionID.Organizations),
+			organization: F.Relation(Collection.Organizations),
 			topics: T.Array(T.String())
 		}),
 		F.DateSpan(),
