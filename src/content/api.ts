@@ -4,6 +4,7 @@ import { Value } from '@sinclair/typebox/value';
 import fm from 'front-matter';
 // import _ from 'lodash';
 import { Maybe } from '$lib/maybe';
+import { ajv } from '$lib/ajv';
 
 //
 
@@ -63,14 +64,24 @@ export function importEntryRawFile<C extends CollectionKey>(
 
 //
 
+function ajvValidate<S extends TAnySchema>(schema: S, data: unknown) {
+	// @ts-expect-error Here says that type infer is possibly infinite, but i don't care about types here
+	const validate = ajv.compile(schema);
+	validate(data);
+	return validate.errors;
+}
+
 export function parseFrontmatter<S extends TAnySchema>(
 	schema: S,
 	fileData: FileData
 ): Maybe.Maybe<Static<S>> {
 	try {
 		const frontmatterData = fm(fileData.content).attributes;
-		return Value.Encode(schema, frontmatterData);
+		const validationErrors = ajvValidate(schema, frontmatterData);
+		if (validationErrors) console.log(validationErrors);
+		return Value.Decode(schema, frontmatterData);
 	} catch (e) {
+		console.log(e);
 		console.log(`Failed to parse: ${fileData.path}`);
 		return undefined;
 	}
