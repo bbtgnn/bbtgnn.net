@@ -1,7 +1,7 @@
 ---
 title: Tipi pigri e discreti
 organization:
-  collection: organizations
+  relation: organizations
   records:
     - sos
 date_start: '2020-10-12'

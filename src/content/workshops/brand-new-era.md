@@ -1,7 +1,7 @@
 ---
 title: A Brand New Era!
 organization:
-  collection: organizations
+  relation: organizations
   records:
     - sos
 date_start: '2020-09-30'
