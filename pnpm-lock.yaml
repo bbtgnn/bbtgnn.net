@@ -20,6 +20,9 @@ dependencies:
   date-fns:
     specifier: ^3.3.1
     version: 3.3.1
+  fp-ts:
+    specifier: ^2.16.2
+    version: 2.16.2
   front-matter:
     specifier: ^4.0.2
     version: 4.0.2
@@ -1490,6 +1493,10 @@ packages:
       cross-spawn: 7.0.3
       signal-exit: 4.1.0
     dev: true
+
+  /fp-ts@2.16.2:
+    resolution: {integrity: sha512-CkqAjnIKFqvo3sCyoBTqgJvF+bHrSik584S9nhTjtBESLx26cbtVMR/T9a6ApChOcSDAaM3JydDmWDUn4EEXng==}
+    dev: false
 
   /fraction.js@4.3.7:
     resolution: {integrity: sha512-ZsDfxO51wGAXREY55a7la9LScWpwv9RxIrYABrlvOFBlH/ShPnrtsXeuUIfXKKOVicNxQ+o8JTbJvjS4M89yew==}
