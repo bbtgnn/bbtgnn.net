@@ -25,7 +25,7 @@ export const Markdown = () =>
 
 export const Relation = (collection: Collection) =>
 	T.Object({
-		collection: T.Literal(collection),
+		relation: T.Literal(collection),
 		records: T.Array(T.String())
 	});
 
