@@ -30,17 +30,6 @@ export const Relation = (collection: Collection) =>
 		records: T.Array(T.String())
 	});
 
-// export const DateString = () => T.String();
-export const DateString = (dateFormat = 'yyyy-MM') =>
-	T.Transform(T.String()).Decode(stringToDate).Encode(dateToString(dateFormat));
-
-export const DateSpan = () =>
-	T.Object({
-		date_start: DateString(),
-		date_end: T.Optional(DateString()),
-		current: T.Optional(T.Boolean())
-	});
-
 export const TimeQuantity = () =>
 	T.Object({
 		days: T.Optional(T.Number()),
@@ -53,6 +42,18 @@ export const LocationString = () =>
 	});
 
 //
+
+type DateFormats = 'yyyy-MM' | 'yyyy-MM-dd';
+
+export const DateString = (dateFormat: DateFormats) =>
+	T.Transform(T.String()).Decode(stringToDate).Encode(dateToString(dateFormat));
+
+export const DateSpan = (dateFormat: DateFormats) =>
+	T.Object({
+		date_start: DateString(dateFormat),
+		date_end: T.Optional(DateString(dateFormat)),
+		current: T.Optional(T.Boolean())
+	});
 
 function stringToDate(v: string): Date | string {
 	try {

@@ -24,7 +24,7 @@ export const Collections = {
 			employer: F.Relation(Collection.Organizations),
 			roles: T.Array(T.String())
 		}),
-		F.DateSpan()
+		F.DateSpan('yyyy-MM')
 	]),
 
 	experiences_learning: T.Composite([
@@ -32,7 +32,7 @@ export const Collections = {
 			title: T.String(),
 			institution: F.Relation(Collection.Organizations)
 		}),
-		F.DateSpan()
+		F.DateSpan('yyyy-MM')
 	]),
 
 	workshops: T.Composite([
@@ -41,7 +41,7 @@ export const Collections = {
 			organization: F.Relation(Collection.Organizations),
 			topics: T.Array(T.String())
 		}),
-		F.DateSpan(),
+		F.DateSpan('yyyy-MM-dd'),
 		F.TimeQuantity(),
 		F.Links()
 	])
