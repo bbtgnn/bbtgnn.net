@@ -47,4 +47,4 @@ export const Collections = {
 		F.TimeQuantity(),
 		F.Links()
 	])
-} as const;
+};
