@@ -10,10 +10,8 @@ export enum Collection {
 	WorkExperiences = 'experiences_work'
 }
 
-//
-
 export const Collections = {
-	organizations: T.Intersect([
+	organizations: T.Composite([
 		T.Object({
 			name: T.String()
 		}),
@@ -21,7 +19,7 @@ export const Collections = {
 		F.Links()
 	]),
 
-	experiences_work: T.Intersect([
+	experiences_work: T.Composite([
 		T.Object({
 			employer: F.Relation(Collection.Organizations),
 			roles: T.Array(T.String())
@@ -29,7 +27,7 @@ export const Collections = {
 		F.DateSpan()
 	]),
 
-	experiences_learning: T.Intersect([
+	experiences_learning: T.Composite([
 		T.Object({
 			title: T.String(),
 			institution: F.Relation(Collection.Organizations)
@@ -37,7 +35,7 @@ export const Collections = {
 		F.DateSpan()
 	]),
 
-	workshops: T.Intersect([
+	workshops: T.Composite([
 		T.Object({
 			title: T.String(),
 			organization: F.Relation(Collection.Organizations),
