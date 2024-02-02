@@ -9,5 +9,5 @@ export const load = async () => {
 		collection: collectionList[i],
 		entries: o
 	}));
-	return labelledData;
+	return { labelledData };
 };

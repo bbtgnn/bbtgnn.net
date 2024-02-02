@@ -1,8 +1,4 @@
 <script lang="ts">
-	import Comp from './comp.svelte';
-
-	export let data;
-	let { organizations } = data;
 </script>
 
 <h1>Work in prooooooog</h1>
