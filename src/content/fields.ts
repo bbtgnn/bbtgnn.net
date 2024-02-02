@@ -13,20 +13,24 @@ export const ID = () =>
 		id: T.String()
 	});
 
-export const Links = () => T.Object({ links: T.Optional(T.Array(T.String({ format: 'uri' }))) });
+export const Links = () =>
+	T.Object({
+		links: T.Optional(T.Array(T.String()))
+	});
 
-export const Markdown = () => T.Object({ markdown: T.String() });
+export const Markdown = () =>
+	T.Object({
+		markdown: T.String()
+	});
 
 export const Relation = (collection: Collection) =>
 	T.Object({
 		collection: T.Literal(collection),
-		records: T.Array(ID())
+		records: T.Array(T.String())
 	});
 
-export const DateString = () =>
-	T.Transform(T.String())
-		.Decode((v) => new Date(v))
-		.Encode((v) => v.toISOString());
+// export const DateString = () => T.String();
+export const DateString = () => T.Transform(T.String()).Decode(stringToDate).Encode(dateToString);
 
 export const DateSpan = () =>
 	T.Object({
@@ -45,3 +49,18 @@ export const LocationString = () =>
 	T.Object({
 		location: T.Optional(T.String())
 	});
+
+//
+
+function stringToDate(v: string): Date | string {
+	try {
+		return new Date(v);
+	} catch (e) {
+		return v;
+	}
+}
+
+function dateToString(v: string | Date): string {
+	if (typeof v === 'string') return v;
+	else return v.toISOString();
+}
