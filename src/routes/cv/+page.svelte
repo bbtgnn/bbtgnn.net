@@ -4,5 +4,5 @@
 </script>
 
 {#each workshops as workshop}
-	<pre>{workshop}</pre>
+	<pre>{JSON.stringify(workshop, null, 2)}</pre>
 {/each}
