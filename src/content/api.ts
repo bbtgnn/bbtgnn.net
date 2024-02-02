@@ -84,7 +84,9 @@ export function parseFrontmatter<S extends TAnySchema>(
 		const ajvErrors = ajvValidate(schema, frontmatterData);
 		if (ajvErrors) console.log(ajvErrors);
 
-		return Value.Decode(schema, frontmatterData);
+		const decoded = Value.Decode(schema, frontmatterData);
+		const cleaned = Value.Clean(schema, decoded);
+		return cleaned;
 	} catch (e) {
 		console.log(e);
 		console.log(`Failed to parse: ${fileData.path}`);
