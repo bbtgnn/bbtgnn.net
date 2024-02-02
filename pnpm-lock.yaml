@@ -17,6 +17,9 @@ dependencies:
   ajv-formats:
     specifier: ^2.1.1
     version: 2.1.1(ajv@8.12.0)
+  date-fns:
+    specifier: ^3.3.1
+    version: 3.3.1
   front-matter:
     specifier: ^4.0.2
     version: 4.0.2
@@ -1118,6 +1121,10 @@ packages:
     engines: {node: '>=4'}
     hasBin: true
     dev: true
+
+  /date-fns@3.3.1:
+    resolution: {integrity: sha512-y8e109LYGgoQDveiEBD3DYXKba1jWf5BA8YU1FL5Tvm0BTdEfy54WLCwnuYWZNnzzvALy/QQ4Hov+Q9RVRv+Zw==}
+    dev: false
 
   /debug@4.3.4:
     resolution: {integrity: sha512-PRWFHuSU3eDtQJPvnNY7Jcket1j0t5OuOsFzPPzsekD52Zl8qUfFIPEiswXqIvHWGVHOgX+7G/vCNNhehwxfkQ==}

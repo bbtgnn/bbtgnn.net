@@ -1,5 +1,6 @@
 import { Type as T, type TSchema } from '@sinclair/typebox';
 import { type Collection } from './config';
+import { format as formatDate } from 'date-fns/format';
 
 // TODO - Valutare l'utilizzo di Effect.Schema
 
@@ -30,7 +31,8 @@ export const Relation = (collection: Collection) =>
 	});
 
 // export const DateString = () => T.String();
-export const DateString = () => T.Transform(T.String()).Decode(stringToDate).Encode(dateToString);
+export const DateString = (dateFormat = 'yyyy-MM') =>
+	T.Transform(T.String()).Decode(stringToDate).Encode(dateToString(dateFormat));
 
 export const DateSpan = () =>
 	T.Object({
@@ -60,7 +62,9 @@ function stringToDate(v: string): Date | string {
 	}
 }
 
-function dateToString(v: string | Date): string {
-	if (typeof v === 'string') return v;
-	else return v.toISOString();
+function dateToString(dateFormat: string) {
+	return (v: string | Date) => {
+		if (typeof v === 'string') return v;
+		else return formatDate(v, dateFormat);
+	};
 }
