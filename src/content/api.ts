@@ -77,8 +77,13 @@ export function parseFrontmatter<S extends TAnySchema>(
 ): Maybe.Maybe<Static<S>> {
 	try {
 		const frontmatterData = fm(fileData.content).attributes;
-		const validationErrors = ajvValidate(schema, frontmatterData);
-		if (validationErrors) console.log(validationErrors);
+
+		const typeboxErrors = Array.from(Value.Errors(schema, frontmatterData));
+		if (typeboxErrors.length) console.log(typeboxErrors);
+
+		const ajvErrors = ajvValidate(schema, frontmatterData);
+		if (ajvErrors) console.log(ajvErrors);
+
 		return Value.Decode(schema, frontmatterData);
 	} catch (e) {
 		console.log(e);
