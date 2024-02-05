@@ -1,13 +1,26 @@
 import { getCollection } from '$content/api';
 import { Collection } from '$content/config';
 
+import * as E from 'effect/Either';
+import * as O from 'effect/Option';
+
 export const load = async () => {
-	const collectionList = Object.values(Collection);
-	const dataPromise = collectionList.map((collection) => getCollection(collection));
-	const data = await Promise.all(dataPromise);
-	const labelledData = data.map((o, i) => ({
-		collection: collectionList[i],
-		entries: o
-	}));
-	return { labelledData };
+	const collectionIds = Object.values(Collection);
+	const collectionsDiagnosticsReportPromises = collectionIds.map(getCollectionDiagnosticsReport);
+	const collectionsDiagnosticsReports = await Promise.all(collectionsDiagnosticsReportPromises);
+	return { collectionsDiagnosticsReports };
 };
+
+async function getCollectionDiagnosticsReport(collectionId: Collection) {
+	const entries = await getCollection(collectionId);
+	const totalEntriesNumber = entries.length;
+	const invalidEntries = entries.filter(E.isLeft).map(E.getLeft).filter(O.isSome).map(O.getOrThrow);
+	const invalidEntriesNumber = invalidEntries.length;
+
+	return {
+		collectionId,
+		totalEntriesNumber,
+		invalidEntriesNumber,
+		invalidEntries
+	};
+}
