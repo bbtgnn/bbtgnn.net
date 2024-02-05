@@ -5,7 +5,7 @@
 	import { pipe } from 'effect/Function';
 
 	export let data;
-	let { collectionsDiagnosticsReports } = data;
+	let { collectionsDiagnosticsReports, contentDirectoryPath } = data;
 
 	function groupErrors(errors: ValueError[]) {
 		return pipe(
@@ -16,14 +16,12 @@
 		);
 	}
 
-	const ROOT = '/Users/giovanniabbatepaolo/Documents/GitHub/bbtgnn.net/src/content';
-
 	function openFileInVSCodeUrl(filePath: string) {
 		return `vscode://file/${filePath}`;
 	}
 
 	function vscode(filePath: string) {
-		return openFileInVSCodeUrl(`${ROOT}${filePath}`);
+		return openFileInVSCodeUrl(`${contentDirectoryPath}${filePath}`);
 	}
 </script>
 
