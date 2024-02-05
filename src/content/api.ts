@@ -3,6 +3,7 @@ import { type Static, type TAnySchema } from '@sinclair/typebox';
 import { Value, ValueErrorType, type ValueError } from '@sinclair/typebox/value';
 import fm from 'front-matter';
 
+import * as A from 'effect/ReadonlyArray';
 import * as E from 'effect/Either';
 import * as O from 'effect/Option';
 import { pipe } from 'effect/Function';
@@ -70,7 +71,7 @@ export function importEntryRawFile<C extends CollectionKey>(
 export function parseFrontmatter<S extends TAnySchema>(
 	schema: S,
 	fileData: FileData
-): E.Either<DiagnosticsEntryReport, Static<S>> {
+): E.Either<EntryDiagnosticsReport, Static<S>> {
 	try {
 		const frontmatterData = fm(fileData.content).attributes;
 
@@ -103,7 +104,7 @@ export function parseFrontmatter<S extends TAnySchema>(
 export async function processEntryRawFile<S extends TAnySchema>(
 	schema: S,
 	rawFile: RawFile
-): Promise<E.Either<DiagnosticsEntryReport, Static<S>>> {
+): Promise<E.Either<EntryDiagnosticsReport, Static<S>>> {
 	const entryFileData = await pipe(rawFile, readRawFile);
 	return pipe(entryFileData, (data) => parseFrontmatter(schema, data));
 }
@@ -111,7 +112,7 @@ export async function processEntryRawFile<S extends TAnySchema>(
 export function getEntry<C extends CollectionKey>(
 	collectionId: C,
 	recordId: string
-): O.Option<Promise<E.Either<DiagnosticsEntryReport, CollectionType<C>>>> {
+): O.Option<Promise<E.Either<EntryDiagnosticsReport, CollectionType<C>>>> {
 	const collectionSchema = getCollectionSchema(collectionId);
 	return pipe(
 		importEntryRawFile(collectionId, recordId),
@@ -121,19 +122,54 @@ export function getEntry<C extends CollectionKey>(
 
 export async function getCollection<T extends CollectionKey>(
 	collectionId: T
-): Promise<Array<E.Either<DiagnosticsEntryReport, CollectionType<T>>>> {
+): Promise<Array<CollectionType<T>>> {
 	const collectionSchema = getCollectionSchema(collectionId);
-	const collectionRawFiles = importCollectionRawFiles(collectionId);
-	const collectionDataPromises = collectionRawFiles.map((rawFile) =>
-		processEntryRawFile(collectionSchema, rawFile)
+	const collectionDataPromises = pipe(
+		collectionId,
+		importCollectionRawFiles,
+		A.map((rawFile) => processEntryRawFile(collectionSchema, rawFile))
 	);
 	const collectionData = await Promise.all(collectionDataPromises);
-	return collectionData;
+	return pipe(collectionData, A.filter(E.isRight), A.map(E.getOrThrow));
 }
 
-// TODO - List invalid files and the reason why
+export async function getCollectionDiagnostics<T extends CollectionKey>(
+	collectionId: T
+): Promise<CollectionDiagnosticsReport> {
+	const collectionSchema = getCollectionSchema(collectionId);
 
-export interface DiagnosticsEntryReport {
+	const collectionDataPromises = pipe(
+		collectionId,
+		importCollectionRawFiles,
+		A.map((rawFile) => processEntryRawFile(collectionSchema, rawFile))
+	);
+	const collectionData = await Promise.all(collectionDataPromises);
+
+	const totalEntriesNumber = collectionData.length;
+
+	const invalidEntries = collectionData
+		.filter(E.isLeft)
+		.map(E.getLeft)
+		.filter(O.isSome)
+		.map(O.getOrThrow);
+	const invalidEntriesNumber = invalidEntries.length;
+
+	return {
+		collectionId,
+		totalEntriesNumber,
+		invalidEntriesNumber,
+		invalidEntries
+	};
+}
+
+export interface EntryDiagnosticsReport {
 	filePath: string;
 	errors: ValueError[];
+}
+
+export interface CollectionDiagnosticsReport {
+	collectionId: string;
+	totalEntriesNumber: number;
+	invalidEntriesNumber: number;
+	invalidEntries: EntryDiagnosticsReport[];
 }
