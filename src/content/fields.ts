@@ -26,8 +26,7 @@ export const Markdown = () =>
 
 export const Relation = (collection: Collection) =>
 	T.Object({
-		relation: T.Literal(collection),
-		records: T.Array(T.String())
+		[collection]: T.Array(T.String())
 	});
 
 export const TimeQuantity = () =>
@@ -43,6 +42,11 @@ export const LocationString = () =>
 
 //
 
+export const Nullable = <T extends TSchema>(schema: T) =>
+	T.Union([schema, T.Null(), T.Undefined()]);
+
+//
+
 type DateFormats = 'yyyy-MM' | 'yyyy-MM-dd';
 
 export const DateString = (dateFormat: DateFormats) =>
@@ -51,7 +55,7 @@ export const DateString = (dateFormat: DateFormats) =>
 export const DateSpan = (dateFormat: DateFormats) =>
 	T.Object({
 		date_start: DateString(dateFormat),
-		date_end: T.Optional(DateString(dateFormat)),
+		date_end: Nullable(DateString(dateFormat)),
 		current: T.Optional(T.Boolean())
 	});
 
