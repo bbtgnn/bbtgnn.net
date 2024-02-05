@@ -1,8 +1,10 @@
 ---
 title: Dimploma di maturità scientifica
-place: Liceo Scientifico "S. Simone"
-start: 2008-09
-end: 2014-07
+institution:
+  organizations:
+    - sante-simone
+date_start: 2008-09
+date_end: 2014-07
 location: Italia, Conversano
 ---
 

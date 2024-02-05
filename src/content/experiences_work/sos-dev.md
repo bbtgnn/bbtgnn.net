@@ -1,9 +1,12 @@
 ---
-client: sos
-start: 2021-05
+employer:
+  organizations:
+    - sos
+date_start: 2021-05
+date_end:
 current: true
 roles:
-- Sviluppatore web
+  - Sviluppatore web
 ---
 
 Join
