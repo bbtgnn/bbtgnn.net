@@ -1,8 +1,7 @@
 ---
 title: Basic generative design (2)
 organization:
-  relation: organizations
-  records:
+  organizations:
     - sos
 date_start: '2020-11-28'
 date_end: '2020-12-05'

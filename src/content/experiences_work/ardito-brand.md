@@ -1,9 +1,11 @@
 ---
-client: francesco-ardito
-start: 2015-09
-end: 2016-10
+employer:
+  organizations:
+    - francesco-ardito
+date_start: 2015-09
+date_end: 2016-10
 roles:
-- Progettista grafico
+  - Progettista grafico
 ---
 
 Realizzazione brand identity per attività commerciali del territorio

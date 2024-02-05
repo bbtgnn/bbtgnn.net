@@ -2,11 +2,6 @@ import { Type as T, type TSchema } from '@sinclair/typebox';
 import { type Collection } from './config';
 import { format as formatDate } from 'date-fns/format';
 
-// TODO - Valutare l'utilizzo di Effect.Schema
-
-export const create = <Key extends string, Schema extends TSchema>(key: Key, schema: Schema) =>
-	T.Const({ [key]: schema } as const);
-
 //
 
 export const ID = () =>
@@ -25,10 +20,7 @@ export const Markdown = () =>
 	});
 
 export const Relation = (collection: Collection) =>
-	T.Object({
-		relation: T.Literal(collection),
-		records: T.Array(T.String())
-	});
+	T.Record(T.Literal(collection), T.Array(T.String()));
 
 export const TimeQuantity = () =>
 	T.Object({
@@ -43,15 +35,20 @@ export const LocationString = () =>
 
 //
 
+export const Nullable = <T extends TSchema>(schema: T) =>
+	T.Union([schema, T.Null(), T.Undefined()]);
+
+//
+
 type DateFormats = 'yyyy-MM' | 'yyyy-MM-dd';
 
 export const DateString = (dateFormat: DateFormats) =>
 	T.Transform(T.String()).Decode(stringToDate).Encode(dateToString(dateFormat));
 
-export const DateSpan = (dateFormat: DateFormats) =>
+export const DateSpan = (dateFormat: DateFormats = 'yyyy-MM-dd') =>
 	T.Object({
 		date_start: DateString(dateFormat),
-		date_end: T.Optional(DateString(dateFormat)),
+		date_end: Nullable(DateString(dateFormat)),
 		current: T.Optional(T.Boolean())
 	});
 
