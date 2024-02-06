@@ -1,8 +1,6 @@
 ---
 title: Tipi pigri e discreti
-organization:
-  organizations:
-    - sos
+organization: sos
 date_start: '2020-10-12'
 date_end: '2020-10-12'
 days: 1

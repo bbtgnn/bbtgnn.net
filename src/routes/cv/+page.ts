@@ -1,4 +1,4 @@
-import { getCollection } from '$content/api';
+import { getCollection } from '$lib/content/api';
 import { compareAsc } from 'date-fns';
 
 export const load = async () => {

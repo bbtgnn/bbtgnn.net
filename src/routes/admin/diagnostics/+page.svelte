@@ -3,6 +3,7 @@
 	import * as A from 'effect/ReadonlyArray';
 	import * as R from 'effect/ReadonlyRecord';
 	import { pipe } from 'effect/Function';
+	import { cons } from 'effect/List';
 
 	export let data;
 	let { collectionsDiagnosticsReports, contentDirectoryPath } = data;

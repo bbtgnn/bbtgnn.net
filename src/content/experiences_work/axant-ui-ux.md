@@ -1,7 +1,5 @@
 ---
-employer:
-  organizations:
-    - axant
+employer: axant
 date_start: 2021-05
 date_end: 2021-11
 roles:

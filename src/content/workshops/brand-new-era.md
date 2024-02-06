@@ -1,8 +1,6 @@
 ---
 title: A Brand New Era!
-organization:
-  organizations:
-    - sos
+organization: sos
 date_start: '2020-09-30'
 date_end: '2020-10-03'
 days: 4

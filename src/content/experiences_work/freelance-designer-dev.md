@@ -1,7 +1,5 @@
 ---
-employer:
-  organizations:
-    - freelance
+employer: freelance
 date_start: 2016-02
 date_end:
 current: true

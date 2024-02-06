@@ -1,7 +1,5 @@
 ---
-employer:
-  organizations:
-    - francesco-ardito
+employer: francesco-ardito
 date_start: 2015-09
 date_end: 2016-10
 roles:

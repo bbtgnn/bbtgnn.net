@@ -1,4 +1,4 @@
-import { getCollectionDiagnostics } from '$content/api';
+import { getCollectionDiagnostics } from '$lib/content/api';
 import { Collection } from '$content/config';
 
 export const load = async () => {

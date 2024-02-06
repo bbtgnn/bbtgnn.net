@@ -1,8 +1,6 @@
 ---
 title: Basic generative design (1)
-organization:
-  organizations:
-    - sos
+organization: sos
 date_start: '2020-10-24'
 date_end: '2020-10-25'
 days: 2

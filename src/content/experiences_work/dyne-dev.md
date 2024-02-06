@@ -1,7 +1,5 @@
 ---
-employer:
-  organizations:
-    - dyne
+employer: dyne
 date_start: 2022-10
 date_end:
 current: true

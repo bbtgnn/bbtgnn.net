@@ -1,7 +1,5 @@
 ---
-employer:
-  organizations:
-    - ff3300
+employer: ff3300
 date_start: 2020-10
 date_end: 2021-04
 roles:

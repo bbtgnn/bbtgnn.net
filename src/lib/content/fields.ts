@@ -1,5 +1,5 @@
 import { Type as T, type TSchema } from '@sinclair/typebox';
-import { type Collection } from './config';
+import { type Collection } from '$content/config';
 import { format as formatDate } from 'date-fns/format';
 
 //
@@ -19,8 +19,7 @@ export const Markdown = () =>
 		markdown: T.String()
 	});
 
-export const Relation = (collection: Collection) =>
-	T.Record(T.Literal(collection), T.Array(T.String()));
+//
 
 export const TimeQuantity = () =>
 	T.Object({
@@ -32,6 +31,13 @@ export const LocationString = () =>
 	T.Object({
 		location: T.Optional(T.String())
 	});
+
+//
+
+export const Relation = <T extends Collection>(collection: T) =>
+	T.Transform(T.String())
+		.Decode((id) => ({ collection, id }))
+		.Encode((entry) => entry.id);
 
 //
 

@@ -1,14 +1,15 @@
 import { Type as T } from '@sinclair/typebox';
-import * as F from './fields';
+import { Field as F } from '$lib/content';
 
 //
 
-export enum Collection {
-	Organizations = 'organizations',
-	Workshops = 'workshops',
-	LearningExperiences = 'experiences_learning',
-	WorkExperiences = 'experiences_work'
-}
+export type Collection =
+	| 'organizations'
+	| 'workshops'
+	| 'experiences_learning'
+	| 'experiences_work';
+
+//
 
 export const Collections = {
 	organizations: T.Composite([
@@ -21,7 +22,7 @@ export const Collections = {
 
 	experiences_work: T.Composite([
 		T.Object({
-			employer: F.Relation(Collection.Organizations),
+			employer: F.Relation('organizations'),
 			roles: T.Array(T.String())
 		}),
 		F.DateSpan('yyyy-MM')
@@ -30,7 +31,7 @@ export const Collections = {
 	experiences_learning: T.Composite([
 		T.Object({
 			title: T.String(),
-			institution: F.Relation(Collection.Organizations)
+			institution: F.Relation('organizations')
 		}),
 		F.DateSpan('yyyy-MM')
 	]),
@@ -38,7 +39,7 @@ export const Collections = {
 	workshops: T.Composite([
 		T.Object({
 			title: T.String(),
-			organization: F.Relation(Collection.Organizations),
+			organization: F.Relation('organizations'),
 			topics: T.Array(T.String())
 		}),
 		F.DateSpan('yyyy-MM-dd'),
