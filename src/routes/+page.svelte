@@ -27,7 +27,7 @@
 	<div class="flex flex-col items-center">
 		<p class="font-bold">ℹ️ More</p>
 		<div class="flex flex-wrap justify-center gap-x-3">
-			<a class="text-center" href="https://www.instagram.com/bbtgnn/" target="_blank">
+			<a class="text-center" href="https://www.instagram.com/bbt.gnn/" target="_blank">
 				📷 instagram
 			</a>
 			<a
