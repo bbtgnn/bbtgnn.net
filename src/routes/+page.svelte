@@ -1,8 +1,12 @@
 <script lang="ts">
+	import SvelteMarkdown from 'svelte-markdown';
+
+	export let data;
+	let { entries } = data;
 </script>
 
-<h1>Work in prooooooog</h1>
-<!-- {#each organizations as organization}
-	<Comp data={organization}></Comp>
-	<pre>{JSON.stringify(organization, null, 2)}</pre>
-{/each} -->
+<pre>{JSON.stringify(entries)}</pre>
+
+{#each entries as entry}
+	<SvelteMarkdown source={entry.content} />
+{/each}

@@ -1,0 +1,16 @@
+{
+	"editor.tabCompletion": "on",
+	"emmet.excludeLanguages": [],
+	"emmet.includeLanguages": {
+		"markdown": "html"
+	},
+	"[markdown]": {
+		"editor.wordWrap": "on",
+		"editor.quickSuggestions": {
+			"comments": "on",
+			"strings": "on",
+			"other": "on"
+		}
+	},
+	"emmet.showSuggestionsAsSnippets": true
+}

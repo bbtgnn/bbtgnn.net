@@ -7,5 +7,3 @@ date_end: 2021-03
 roles:
   - Organizzatore di workshop
 ---
-
-Ad uso civico e collettivo

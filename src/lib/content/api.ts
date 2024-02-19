@@ -37,48 +37,6 @@ export function getCollectionSchema<T extends CollectionKey>(
 
 //
 
-type RawFile = {
-	path: string;
-	contentPromise: () => Promise<string>;
-};
-
-type FileData = {
-	path: string;
-	content: string;
-};
-
-export async function readRawFile({ path, contentPromise }: RawFile): Promise<FileData> {
-	return {
-		path,
-		content: await contentPromise()
-	};
-}
-
-export function isCollectionPath<C extends CollectionKey>(collectionId: C, path: string): boolean {
-	return path.startsWith(`./${collectionId}`);
-}
-
-export function importCollectionRawFiles<C extends CollectionKey>(collectionId: C): RawFile[] {
-	const rawFilesRecord = import.meta.glob('./**/*.md', { as: 'raw' });
-	const rawFiles = Object.entries(rawFilesRecord).map(([path, contentPromise]) => ({
-		path,
-		contentPromise
-	}));
-	const collectionRawFiles = rawFiles.filter(({ path }) => isCollectionPath(collectionId, path));
-	return collectionRawFiles;
-}
-
-export function importEntryRawFile<C extends CollectionKey>(
-	collectionId: C,
-	entryId: string
-): O.Option<RawFile> {
-	return O.fromNullable(
-		importCollectionRawFiles(collectionId)
-			.filter((rawFile) => rawFile.path.endsWith(`${entryId}.md`))
-			.at(0)
-	);
-}
-
 //
 
 export function parseFrontmatter<S extends TAnySchema>(
@@ -138,7 +96,6 @@ export async function getCollection<T extends CollectionKey>(
 	expand: (keyof CollectionType<T>)[] = []
 ): Promise<Array<CollectionType<T>>> {
 	const collectionSchema = getCollectionSchema(collectionId);
-	console.log(collectionSchema);
 	const collectionDataPromises = pipe(
 		collectionId,
 		importCollectionRawFiles,
