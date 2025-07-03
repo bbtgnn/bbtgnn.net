@@ -32,7 +32,7 @@
 			</a>
 			<a
 				class="text-center"
-				href="https://giovanniabbatepaolo.notion.site/458ab8fdff2742bd817fdd6ac820e188?v=cda461a173de48e9b30d487b7f741fd2&pvs=4"
+				href="https://giovanniabbatepaolo.notion.site/458ab8fdff2742bd817fdd6ac820e188?v=cda461a173de48e9b30d487b7f741fd2"
 				target="_blank"
 			>
 				📘 portfolio (creative coding)
