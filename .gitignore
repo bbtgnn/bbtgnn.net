@@ -1,5 +1,8 @@
 node_modules
 
+# Worktrees
+.worktrees
+
 # Output
 .output
 .vercel
