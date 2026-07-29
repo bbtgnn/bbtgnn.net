@@ -25,14 +25,14 @@
 		alt: string;
 	};
 
-type CaptionSlide = {
-	data: GalleryItem;
-};
+	type CaptionSlide = {
+		data: GalleryItem;
+	};
 
 	let { images, trigger }: Props = $props();
 
 	let lightbox: PhotoSwipeLightbox | null = null;
-let captionPlugin: { destroy(): void } | null = null;
+	let captionPlugin: { destroy(): void } | null = null;
 
 	const dataSource = $derived(
 		images.map((image) => ({
@@ -59,7 +59,19 @@ let captionPlugin: { destroy(): void } | null = null;
 	onMount(() => {
 		lightbox = new PhotoSwipeLightbox({
 			dataSource,
-			pswpModule: () => import('photoswipe')
+			pswpModule: () => import('photoswipe'),
+			paddingFn: (viewportSize) => {
+				const narrow = viewportSize.x < 600;
+				const edge = narrow ? 20 : 28;
+				const side = narrow ? 20 : 56;
+
+				return {
+					top: edge,
+					bottom: edge,
+					left: side,
+					right: side
+				};
+			}
 		});
 
 		captionPlugin = new PhotoSwipeDynamicCaption(lightbox, {
