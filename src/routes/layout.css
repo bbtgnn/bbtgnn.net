@@ -138,6 +138,37 @@
 	}
 }
 
+@layer utilities {
+	.media-loading {
+		background-color: var(--color-stone-100);
+		background-image: linear-gradient(
+			100deg,
+			transparent 20%,
+			var(--color-stone-200) 40%,
+			var(--color-stone-200) 60%,
+			transparent 80%
+		);
+		background-size: 200% 100%;
+		animation: media-shimmer 1.6s ease-in-out infinite;
+	}
+
+	@keyframes media-shimmer {
+		from {
+			background-position: 100% 0;
+		}
+		to {
+			background-position: -100% 0;
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.media-loading {
+			animation: none;
+			background-image: none;
+		}
+	}
+}
+
 @theme {
 	--color-didattica: theme(--color-lime-400);
 	--color-architettura: theme(--color-orange-400);

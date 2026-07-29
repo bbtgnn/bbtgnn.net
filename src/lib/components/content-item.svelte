@@ -1,6 +1,7 @@
 <script lang="ts">
 	import LinkMini from '$lib/components/link-mini.svelte';
 	import MediaImage from '$lib/components/media-image.svelte';
+	import MediaSurface from '$lib/components/media-surface.svelte';
 	import { mediaSrcKey, type ContentItem } from '$lib/content/types';
 
 	/** Matches sheet content max width (~62.5rem / 1000px). */
@@ -30,27 +31,32 @@
 					alt={media.alt ?? `${item.name} — ${i + 1}`}
 					width={media.width}
 					height={media.height}
+					zoomVariant="prominent"
 				/>
 			{:else if media.type === 'image'}
-				<enhanced:img
-					src={media.src}
-					alt={media.alt ?? `${item.name} — ${i + 1}`}
-					class="w-full rounded-lg border border-stone-200"
-					sizes={SHEET_IMAGE_SIZES}
-					loading="lazy"
-					decoding="async"
-				/>
+				<MediaSurface class="overflow-hidden rounded-lg border border-stone-200">
+					<enhanced:img
+						src={media.src}
+						alt={media.alt ?? `${item.name} — ${i + 1}`}
+						class="w-full"
+						sizes={SHEET_IMAGE_SIZES}
+						loading="lazy"
+						decoding="async"
+					/>
+				</MediaSurface>
 			{:else}
-				<video
-					src={media.src}
-					class="w-full rounded-lg border border-stone-200"
-					autoplay
-					muted
-					loop
-					playsinline
-					preload="none"
-					aria-label="{item.name} — {i + 1}"
-				></video>
+				<MediaSurface class="overflow-hidden rounded-lg border border-stone-200">
+					<video
+						src={media.src}
+						class="w-full"
+						autoplay
+						muted
+						loop
+						playsinline
+						preload="none"
+						aria-label="{item.name} — {i + 1}"
+					></video>
+				</MediaSurface>
 			{/if}
 		{/each}
 	</div>

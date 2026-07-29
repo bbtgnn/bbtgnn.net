@@ -110,6 +110,9 @@
 			<li>
 				<LinkMini href="mailto:giovanniabb@gmail.com">email</LinkMini>
 			</li>
+			<li>
+				<LinkMini href="/curriculum-vitae.pdf">curriculum vitae (ita)</LinkMini>
+			</li>
 		</ul>
 	</div>
 </main>
