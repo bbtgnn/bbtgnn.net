@@ -8,6 +8,8 @@ export type MediaItem =
 	| {
 			type: 'image-with-zoom';
 			src: ImageSrc;
+			/** Full-resolution asset for PhotoSwipe (e.g. SVG); defaults to `src`. */
+			zoomSrc?: string;
 			width: number;
 			height: number;
 			alt?: string;

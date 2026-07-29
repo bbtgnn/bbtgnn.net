@@ -31,6 +31,7 @@
 					alt={media.alt ?? `${item.name} — ${i + 1}`}
 					width={media.width}
 					height={media.height}
+					zoomSrc={media.zoomSrc}
 					zoomVariant="prominent"
 				/>
 			{:else if media.type === 'image'}

@@ -1,6 +1,7 @@
 import type { ContentSheet } from '$lib/content/types';
 import * as m from '$lib/paraglide/messages';
-import codingIntroduction from './coding-introduction.svg';
+import codingIntroduction from './coding-introduction.webp?enhanced';
+import codingIntroductionFull from './coding-introduction.svg';
 import web from './web.mp4';
 
 export function getConceptsUniSheet(): ContentSheet {
@@ -16,6 +17,7 @@ export function getConceptsUniSheet(): ContentSheet {
 					{
 						type: 'image-with-zoom',
 						src: codingIntroduction,
+						zoomSrc: codingIntroductionFull,
 						alt: m.content_concepts_intro_alt(),
 						width: 3816,
 						height: 3504
