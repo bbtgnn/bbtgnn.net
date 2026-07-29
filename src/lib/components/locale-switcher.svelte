@@ -22,6 +22,7 @@
 			class:current={locale === getLocale()}
 			hreflang={locale}
 			aria-current={locale === getLocale() ? 'page' : undefined}
+			data-sveltekit-reload
 		>
 			{locale}
 			<span aria-hidden="true">{flags[locale] ?? ''}</span>
