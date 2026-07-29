@@ -1,11 +1,11 @@
 <script lang="ts">
 	import LinkMini from '$lib/components/link-mini.svelte';
-	import PhotoSwipeGallery, {
-		type Image
-	} from '$lib/components/photo-swipe-gallery.svelte';
+	import PhotoSwipeGallery, { type Image } from '$lib/components/photo-swipe-gallery.svelte';
 	import Sheet from '$lib/components/sheet.svelte';
 	import codingIntroduction from '$lib/content/concepts-uni/coding-introduction.svg';
 	import web from '$lib/content/concepts-uni/web.gif';
+	import dashboard1 from '$lib/content/restor/dashboard-1.svg';
+	import dashboard2 from '$lib/content/restor/dashboard-2.svg';
 	import { ArrowUpRight } from '@lucide/svelte';
 
 	const conceptsUniImages: Image[] = [
@@ -22,6 +22,23 @@
 			height: 623,
 			alt: 'Web',
 			caption: 'Web'
+		}
+	];
+
+	const restorImages: Image[] = [
+		{
+			src: dashboard1,
+			width: 1440,
+			height: 900,
+			alt: 'Restor dashboard 1',
+			caption: 'Restor dashboard 1'
+		},
+		{
+			src: dashboard2,
+			width: 1440,
+			height: 900,
+			alt: 'Restor dashboard 2',
+			caption: 'Restor dashboard 2'
 		}
 	];
 </script>
@@ -90,7 +107,19 @@
 		<p>Da freelance:</p>
 		<ul>
 			<li>
-				<a href="https://x.com/gabbattepaolo">Applico </a>
+				Ho progettato una dashboard
+				<PhotoSwipeGallery images={restorImages}>
+					{#snippet trigger({ props })}
+						<button
+							{...props}
+							class="-ml-1 inline-flex h-4 w-5 items-center justify-center rounded-full bg-secondary text-foreground hover:bg-accent"
+							aria-label="Apri galleria dashboard Restor"
+						>
+							<ArrowUpRight size={12} />
+						</button>
+					{/snippet}
+				</PhotoSwipeGallery>
+				per <LinkMini href="https://restor.eco/">Restor, una ONG Svizzera</LinkMini>
 			</li>
 		</ul>
 	</div>

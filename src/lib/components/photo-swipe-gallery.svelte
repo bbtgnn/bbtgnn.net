@@ -80,6 +80,8 @@
 			dataSource,
 			pswpModule: () => import('photoswipe'),
 			bgOpacity: 1,
+			bgClickAction: false,
+			loop: false,
 			showHideAnimationType: 'fade',
 			showAnimationDuration: 300,
 			hideAnimationDuration: 300,
@@ -120,6 +122,23 @@
 			if (!lightbox?.pswp?.options.hideAnimationDuration) return;
 			lightbox.pswp.element?.classList.add('pswp--sheet-out');
 			lightbox.pswp.element?.classList.remove('pswp--sheet-in');
+		});
+
+		lightbox.on('uiRegister', () => {
+			const pswp = lightbox?.pswp;
+			if (!pswp) return;
+
+			const goToAnimated = (index: number) => {
+				const animate = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+				pswp.mainScroll.moveIndexBy(
+					pswp.getLoopedIndex(index) - pswp.potentialIndex,
+					animate
+				);
+			};
+
+			pswp.goTo = (index: number) => goToAnimated(index);
+			pswp.next = () => goToAnimated(pswp.potentialIndex + 1);
+			pswp.prev = () => goToAnimated(pswp.potentialIndex - 1);
 		});
 
 		lightbox.init();
