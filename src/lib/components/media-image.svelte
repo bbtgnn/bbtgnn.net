@@ -1,9 +1,13 @@
 <script lang="ts">
 	import { ZoomIn } from '@lucide/svelte';
+	import { isPicture, type ImageSrc } from '$lib/content/types';
 	import PhotoSwipeLightbox from 'photoswipe/lightbox';
 	import type { ClassValue } from 'svelte/elements';
 	import { onMount } from 'svelte';
 	import 'photoswipe/style.css';
+
+	/** Matches sheet content max width (~62.5rem / 1000px). */
+	const SHEET_IMAGE_SIZES = 'min(1000px, 100vw)';
 
 	let {
 		src,
@@ -12,18 +16,22 @@
 		height,
 		class: className
 	}: {
-		src: string;
+		src: ImageSrc;
 		alt: string;
 		width: number;
 		height: number;
 		class?: ClassValue;
 	} = $props();
 
+	const zoomSrc = $derived(isPicture(src) ? src.img.src : src);
+	const zoomWidth = $derived(isPicture(src) ? src.img.w : width);
+	const zoomHeight = $derived(isPicture(src) ? src.img.h : height);
+
 	let lightbox: PhotoSwipeLightbox | null = null;
 
 	onMount(() => {
 		lightbox = new PhotoSwipeLightbox({
-			dataSource: [{ src, width, height, alt }],
+			dataSource: [{ src: zoomSrc, width: zoomWidth, height: zoomHeight, alt }],
 			pswpModule: () => import('photoswipe')
 		});
 
@@ -37,12 +45,23 @@
 
 	$effect(() => {
 		if (!lightbox) return;
-		lightbox.options.dataSource = [{ src, width, height, alt }];
+		lightbox.options.dataSource = [{ src: zoomSrc, width: zoomWidth, height: zoomHeight, alt }];
 	});
 </script>
 
 <div class={['relative overflow-hidden rounded-lg border border-stone-200', className]}>
-	<img {src} {alt} class="w-full" loading="lazy" decoding="async" />
+	{#if isPicture(src)}
+		<enhanced:img
+			{src}
+			{alt}
+			class="w-full"
+			sizes={SHEET_IMAGE_SIZES}
+			loading="lazy"
+			decoding="async"
+		/>
+	{:else}
+		<img {src} {alt} class="w-full" loading="lazy" decoding="async" />
+	{/if}
 	<div class="absolute right-2 bottom-2">
 		<button
 			type="button"
