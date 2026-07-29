@@ -42,7 +42,7 @@
 	>
 		<Sheet.Header class="gap-0 p-4 pb-8! sm:p-8">
 			{#if title}
-				<Sheet.Title class="tracking-normal normal-case">{title}</Sheet.Title>
+				<Sheet.Title class="leading-tight tracking-normal normal-case">{title}</Sheet.Title>
 			{/if}
 			{#if description}
 				<Sheet.Description class="mt-0 leading-normal text-foreground">
