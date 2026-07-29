@@ -13,8 +13,8 @@
 {#snippet contentItems(items: ContentItem[])}
 	<div class="space-y-8">
 		{#each items as item (`${item.name}-${item.anno}`)}
-			<article class="space-y-3">
-				<p>
+			<article class="">
+				<p class="font-bold">
 					{#if item.url}
 						<LinkMini href={item.url}>{item.name}</LinkMini>
 					{:else}
@@ -22,7 +22,7 @@
 					{/if}
 					<span class="text-muted-foreground"> · {item.anno}</span>
 				</p>
-				<p>{item.description}</p>
+				<p class="mb-2">{item.description}</p>
 				{#each item.media ?? [] as media, i (media.src)}
 					{#if media.type === 'image-with-zoom'}
 						<MediaImage
