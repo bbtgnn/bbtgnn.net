@@ -41,7 +41,7 @@
 	});
 </script>
 
-<div class={['relative', className]}>
+<div class={['relative overflow-hidden rounded-lg border border-stone-200', className]}>
 	<img {src} {alt} class="w-full" />
 	<div class="absolute right-2 bottom-2">
 		<button
@@ -54,3 +54,11 @@
 		</button>
 	</div>
 </div>
+
+<style>
+	/* Sheet sets pointer-events:none on body and only re-enables the dialog.
+	   PhotoSwipe mounts on body, so restore events while open. */
+	:global(.pswp.pswp--open) {
+		pointer-events: auto;
+	}
+</style>

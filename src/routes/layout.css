@@ -1,7 +1,9 @@
 @import 'tailwindcss';
 @import 'tw-animate-css';
 @import 'shadcn-svelte/tailwind.css';
-@import '@fontsource/solway';
+@import '@fontsource/solway/300.css';
+@import '@fontsource/solway/400.css';
+@import '@fontsource/solway/700.css';
 
 @custom-variant dark (&:is(.dark *));
 @plugin '@tailwindcss/forms';
@@ -126,13 +128,13 @@
 
 @layer base {
 	* {
-		@apply border-border outline-ring/50;
+		@apply border-border text-balance outline-ring/50;
 	}
 	body {
 		@apply bg-background text-foreground;
 	}
 	html {
-		@apply font-sans;
+		@apply font-sans md:text-lg;
 	}
 }
 

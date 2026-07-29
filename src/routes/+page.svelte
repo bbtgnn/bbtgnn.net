@@ -32,11 +32,15 @@
 							height={media.height}
 						/>
 					{:else if media.type === 'image'}
-						<img src={media.src} alt={media.alt ?? `${item.name} — ${i + 1}`} class="w-full" />
+						<img
+							src={media.src}
+							alt={media.alt ?? `${item.name} — ${i + 1}`}
+							class="w-full rounded-lg border border-stone-200"
+						/>
 					{:else}
 						<video
 							src={media.src}
-							class="w-full"
+							class="w-full rounded-lg border border-stone-200"
 							autoplay
 							muted
 							loop
@@ -50,7 +54,7 @@
 	</div>
 {/snippet}
 
-<main>
+<main class="mx-auto max-w-7xl">
 	<div class="group">
 		<p>Ciao! 👋</p>
 		<p>Sono Giovanni Abbatepaolo 🌲</p>
@@ -69,14 +73,14 @@
 
 	<div class="group">
 		<p>Lavoro per:</p>
-		<ul>
+		<ul class="space-y-2">
 			<li>
 				<p>
-					<LinkMini href="https://www.abaperugia.com/author/abbatepaologiovanni/"
-						>Accademia di Belle Arti di Perugia</LinkMini
-					>
+					<LinkMini href="https://www.abaperugia.com/author/abbatepaologiovanni/">
+						Accademia di Belle Arti di Perugia
+					</LinkMini>
 				</p>
-				<ul>
+				<ul class="font-light">
 					<li>
 						<span class="u-didattica">Insegno</span> <span class="u-sviluppo">creative coding</span>
 						<Sheet title="Creative coding">
@@ -104,7 +108,7 @@
 			</li>
 			<li>
 				<p>Dyne.org / Forkbomb</p>
-				<ul>
+				<ul class="font-light">
 					<li>
 						<span class="u-ui-ux-design">Progetto</span> e <span class="u-sviluppo">sviluppo</span>
 						<LinkMini href="https://credimi.io/">Credimi</LinkMini>
@@ -119,18 +123,6 @@
 		<p>Da freelance:</p>
 		<ul>
 			<li>
-				Ho progettato una dashboard
-				<Sheet title="Restor">
-					{#snippet trigger({ props })}
-						<ActionMini {...props} aria-label="Apri galleria dashboard Restor" />
-					{/snippet}
-					{#snippet content()}
-						{@render contentItems(restor)}
-					{/snippet}
-				</Sheet>
-				per <LinkMini href="https://restor.eco/">Restor, una ONG Svizzera</LinkMini>
-			</li>
-			<li>
 				<span class="u-didattica">Insegno</span> <span class="u-sviluppo">programmazione</span> in
 				workshop in giro per l'Italia
 				<Sheet title="Workshop">
@@ -142,26 +134,31 @@
 					{/snippet}
 				</Sheet>
 			</li>
+			<li>
+				Ho <span class="u-ui-ux-design">progettato</span> una
+				<span class="u-architettura">dashboard</span>
+				<Sheet title="Restor">
+					{#snippet trigger({ props })}
+						<ActionMini {...props} aria-label="Apri galleria dashboard Restor" />
+					{/snippet}
+					{#snippet content()}
+						{@render contentItems(restor)}
+					{/snippet}
+				</Sheet>
+				per <LinkMini href="https://restor.eco/">Restor, una ONG Svizzera</LinkMini>
+			</li>
 		</ul>
 	</div>
 
 	<div class="group">
-		<p>Di più:</p>
+		<p>Scopri di più:</p>
 		<ul>
 			<li>
 				<LinkMini
 					href="https://giovanniabbatepaolo.notion.site/458ab8fdff2742bd817fdd6ac820e188?v=cda461a173de48e9b30d487b7f741fd2"
 				>
 					portfolio <span class="u-graphic-design">creative</span>
-					<span class="u-graphic-design">coding</span>
-					<Sheet>
-						{#snippet trigger({ props })}
-							<button {...props}>Open</button>
-						{/snippet}
-						{#snippet content()}
-							<p>Content</p>
-						{/snippet}
-					</Sheet>
+					<span class="u-sviluppo">coding</span>
 				</LinkMini>
 			</li>
 			<li>
@@ -178,39 +175,35 @@
 	@reference "./layout.css";
 
 	main {
-		@apply space-y-4 p-4;
+		@apply space-y-6 p-4;
 	}
 
 	ul {
-		@apply list-outside list-disc pl-4;
+		@apply list-outside list-disc pl-4 marker:text-stone-300;
 	}
 
 	.group > p:first-child {
-		@apply font-bold;
+		@apply mb-1 font-bold;
 	}
 
 	.u-didattica {
-		--u-color: var(--color-didattica);
-		@apply underline decoration-didattica;
+		@apply underline decoration-didattica decoration-wavy decoration-2 underline-offset-2;
 	}
 
 	.u-architettura {
-		--u-color: var(--color-architettura);
-		@apply underline decoration-architettura;
+		@apply underline decoration-architettura decoration-dotted decoration-2 underline-offset-2;
 	}
 
 	.u-sviluppo {
-		--u-color: var(--color-sviluppo);
-		@apply underline decoration-sviluppo;
+		@apply underline decoration-sviluppo decoration-dashed decoration-2 underline-offset-2;
 	}
 
 	.u-ui-ux-design {
-		--u-color: var(--color-ui-ux-design);
-		@apply underline decoration-ui-ux-design;
+		text-decoration: overline;
+		@apply underline decoration-ui-ux-design decoration-2 underline-offset-2;
 	}
 
 	.u-graphic-design {
-		--u-color: var(--color-graphic-design);
-		@apply underline decoration-graphic-design;
+		@apply underline decoration-graphic-design decoration-2 underline-offset-2;
 	}
 </style>
