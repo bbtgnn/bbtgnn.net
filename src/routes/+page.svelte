@@ -2,66 +2,69 @@
 	import ActionMini from '$lib/components/action-mini.svelte';
 	import ContentSheet from '$lib/components/content-sheet.svelte';
 	import LinkMini from '$lib/components/link-mini.svelte';
-	import abaPerugia from '$lib/content/aba-perugia/data';
-	import conceptsUni from '$lib/content/concepts-uni/data';
-	import restor from '$lib/content/restor/data';
-	import workshops from '$lib/content/workshops/data';
+	import { getContentSheets } from '$lib/content';
+	import * as m from '$lib/paraglide/messages';
+
+	const sheets = $derived(getContentSheets());
 </script>
 
 <main class="mx-auto max-w-7xl">
 	<div class="group">
-		<p>Ciao! 👋</p>
-		<p>Sono Giovanni Abbatepaolo 🌲</p>
+		<p>{m.home_greeting()}</p>
+		<p>{m.home_intro()}</p>
 	</div>
 
 	<div class="group">
-		<p>Mi occupo di:</p>
+		<p>{m.home_skills_heading()}</p>
 		<ul class="skills">
-			<li class="u-didattica">Didattica 📚</li>
-			<li class="u-architettura">Architettura dell'informazione 🏗️</li>
-			<li class="u-sviluppo">Sviluppo web 👨‍💻</li>
-			<li class="u-ui-ux-design">UI/UX design 🪢</li>
-			<li class="u-graphic-design">Graphic design 🎨</li>
+			<li class="u-didattica">{m.home_skill_teaching()}</li>
+			<li class="u-architettura">{m.home_skill_info_arch()}</li>
+			<li class="u-sviluppo">{m.home_skill_web_dev()}</li>
+			<li class="u-ui-ux-design">{m.home_skill_uiux()}</li>
+			<li class="u-graphic-design">{m.home_skill_graphic()}</li>
 		</ul>
 	</div>
 
 	<div class="group">
-		<p>Lavoro per:</p>
+		<p>{m.home_work_heading()}</p>
 		<ul class="space-y-2">
 			<li>
 				<p>
 					<LinkMini href="https://www.abaperugia.com/author/abbatepaologiovanni/">
-						Accademia di Belle Arti di Perugia
+						{m.home_aba_name()}
 					</LinkMini>
 				</p>
 				<ul class="font-light">
 					<li>
-						<span class="u-didattica">Insegno</span>
-						<span class="u-sviluppo">creative coding e AI</span>
-						<ContentSheet sheet={abaPerugia}>
+						<span class="u-didattica">{m.home_aba_teach()}</span>
+						<span class="u-sviluppo">{m.home_aba_creative_coding()}</span>
+						<ContentSheet sheet={sheets.abaPerugia}>
 							{#snippet trigger({ props })}
-								<ActionMini {...props} aria-label="Apri esempi creative coding" />
+								<ActionMini {...props} aria-label={m.home_aria_aba_sheet()} />
 							{/snippet}
 						</ContentSheet>
 					</li>
 					<li>
-						<span class="u-graphic-design">Visualizzo</span>
-						<span class="u-architettura">concetti</span>
-						<ContentSheet sheet={conceptsUni}>
+						<span class="u-graphic-design">{m.home_aba_visualize()}</span>
+						<span class="u-architettura">{m.home_aba_concepts()}</span>
+						<ContentSheet sheet={sheets.conceptsUni}>
 							{#snippet trigger({ props })}
-								<ActionMini {...props} aria-label="Apri galleria concetti" />
+								<ActionMini {...props} aria-label={m.home_aria_concepts_sheet()} />
 							{/snippet}
 						</ContentSheet>
 					</li>
 				</ul>
 			</li>
 			<li>
-				<p>Dyne.org / Forkbomb</p>
+				<p>{m.home_dyne_org()}</p>
 				<ul class="font-light">
 					<li>
-						<span class="u-ui-ux-design">Progetto</span> e <span class="u-sviluppo">sviluppo</span>
+						<span class="u-ui-ux-design">{m.home_dyne_design()}</span>
+						{m.home_dyne_and()}
+						<span class="u-sviluppo">{m.home_dyne_develop()}</span>
 						<LinkMini href="https://credimi.io/">Credimi</LinkMini>
-						e <LinkMini href="https://attesta.apps.forkbomb.eu/">Attesta</LinkMini>
+						{m.home_dyne_and_between_products()}
+						<LinkMini href="https://attesta.apps.forkbomb.eu/">Attesta</LinkMini>
 					</li>
 				</ul>
 			</li>
@@ -69,49 +72,54 @@
 	</div>
 
 	<div class="group">
-		<p>Da freelance:</p>
+		<p>{m.home_freelance_heading()}</p>
 		<ul>
 			<li>
-				<span class="u-didattica">Insegno</span> <span class="u-sviluppo">programmazione</span> in
-				workshop in giro per l'Italia
-				<ContentSheet sheet={workshops}>
+				<span class="u-didattica">{m.home_freelance_teach()}</span>
+				<span class="u-sviluppo">{m.home_freelance_programming()}</span>
+				{m.home_freelance_workshops_rest()}
+				<ContentSheet sheet={sheets.workshops}>
 					{#snippet trigger({ props })}
-						<ActionMini {...props} aria-label="Apri elenco workshop" />
+						<ActionMini {...props} aria-label={m.home_aria_workshops_sheet()} />
 					{/snippet}
 				</ContentSheet>
 			</li>
 			<li>
-				Ho <span class="u-ui-ux-design">progettato</span> una
-				<span class="u-architettura">dashboard</span>
-				<ContentSheet sheet={restor}>
+				{m.home_freelance_designed_prefix()}
+				<span class="u-ui-ux-design">{m.home_freelance_designed()}</span>
+				{m.home_freelance_a()}
+				<span class="u-architettura">{m.home_freelance_dashboard()}</span>
+				<ContentSheet sheet={sheets.restor}>
 					{#snippet trigger({ props })}
-						<ActionMini {...props} aria-label="Apri galleria dashboard Restor" />
+						<ActionMini {...props} aria-label={m.home_aria_restor_sheet()} />
 					{/snippet}
 				</ContentSheet>
-				per <LinkMini href="https://restor.eco/">Restor, una ONG Svizzera</LinkMini>
+				{m.home_freelance_for()}
+				<LinkMini href="https://restor.eco/">{m.home_freelance_restor_org()}</LinkMini>
 			</li>
 		</ul>
 	</div>
 
 	<div class="group">
-		<p>Scopri di più:</p>
+		<p>{m.home_more_heading()}</p>
 		<ul>
 			<li>
 				<LinkMini
 					href="https://giovanniabbatepaolo.notion.site/458ab8fdff2742bd817fdd6ac820e188?v=cda461a173de48e9b30d487b7f741fd2"
 				>
-					portfolio <span class="u-graphic-design">creative</span>
-					<span class="u-sviluppo">coding</span>
+					{m.home_more_portfolio()}
+					<span class="u-graphic-design">{m.home_more_creative()}</span>
+					<span class="u-sviluppo">{m.home_more_coding()}</span>
 				</LinkMini>
 			</li>
 			<li>
-				<LinkMini href="https://www.instagram.com/bbt.gnn/">instagram</LinkMini>
+				<LinkMini href="https://www.instagram.com/bbt.gnn/">{m.home_more_instagram()}</LinkMini>
 			</li>
 			<li>
-				<LinkMini href="mailto:giovanniabb@gmail.com">email</LinkMini>
+				<LinkMini href="mailto:giovanniabb@gmail.com">{m.home_more_email()}</LinkMini>
 			</li>
 			<li>
-				<LinkMini href="/curriculum-vitae.pdf">curriculum vitae (ita)</LinkMini>
+				<LinkMini href="/curriculum-vitae.pdf">{m.home_more_cv()}</LinkMini>
 			</li>
 		</ul>
 	</div>
