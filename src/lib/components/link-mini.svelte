@@ -1,9 +1,10 @@
 <script lang="ts">
-	import { ArrowUpRight } from '@lucide/svelte';
+	import ActionMini from '$lib/components/action-mini.svelte';
 	import type { Snippet } from 'svelte';
 	import type { HTMLAnchorAttributes } from 'svelte/elements';
 
 	type Props = HTMLAnchorAttributes & {
+		href: string;
 		children: Snippet;
 	};
 
@@ -12,14 +13,5 @@
 
 <span>
 	{@render children?.()}
-	<a
-		class={[
-			'-ml-1 inline-flex h-4 w-5 items-center justify-center rounded-full bg-secondary text-foreground hover:bg-accent',
-			className
-		]}
-		{target}
-		{...props}
-	>
-		<ArrowUpRight size={12} />
-	</a>
+	<ActionMini class={className ?? undefined} {target} {...props} />
 </span>
