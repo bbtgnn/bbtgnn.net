@@ -6,9 +6,10 @@
 		trigger: Snippet<[{ props: Record<string, unknown> }]>;
 		content: Snippet;
 		title?: string;
+		description?: string;
 	};
 
-	let { trigger, content, title, ...rest }: Props = $props();
+	let { trigger, content, title, description, ...rest }: Props = $props();
 </script>
 
 <Sheet.Root {...rest}>
@@ -42,6 +43,9 @@
 		<Sheet.Header class="min-h-0 flex-1 overflow-y-auto">
 			{#if title}
 				<Sheet.Title>{title}</Sheet.Title>
+			{/if}
+			{#if description}
+				<Sheet.Description>{description}</Sheet.Description>
 			{/if}
 			{@render content?.()}
 		</Sheet.Header>

@@ -22,6 +22,12 @@ export type ContentItem = {
 	media?: MediaItem[];
 };
 
+export type ContentSheet = {
+	title: string;
+	description: string;
+	items: ContentItem[];
+};
+
 export function mediaSrcKey(media: MediaItem): string {
 	if (media.type === 'video') return media.src;
 	if (typeof media.src === 'string') return media.src;

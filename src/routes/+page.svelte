@@ -1,65 +1,12 @@
 <script lang="ts">
 	import ActionMini from '$lib/components/action-mini.svelte';
+	import ContentSheet from '$lib/components/content-sheet.svelte';
 	import LinkMini from '$lib/components/link-mini.svelte';
-	import MediaImage from '$lib/components/media-image.svelte';
-	import Sheet from '$lib/components/sheet.svelte';
 	import abaPerugia from '$lib/content/aba-perugia/data';
 	import conceptsUni from '$lib/content/concepts-uni/data';
 	import restor from '$lib/content/restor/data';
-	import { mediaSrcKey, type ContentItem } from '$lib/content/types';
 	import workshops from '$lib/content/workshops/data';
-
-	/** Matches sheet content max width (~62.5rem / 1000px). */
-	const SHEET_IMAGE_SIZES = 'min(1000px, 100vw)';
 </script>
-
-{#snippet contentItems(items: ContentItem[])}
-	<div class="space-y-8">
-		{#each items as item (`${item.name}-${item.anno}`)}
-			<article class="">
-				<p class="font-bold">
-					{#if item.url}
-						<LinkMini href={item.url}>{item.name}</LinkMini>
-					{:else}
-						{item.name}
-					{/if}
-					<span class="text-muted-foreground"> · {item.anno}</span>
-				</p>
-				<p class="mb-2">{item.description}</p>
-				{#each item.media ?? [] as media, i (mediaSrcKey(media))}
-					{#if media.type === 'image-with-zoom'}
-						<MediaImage
-							src={media.src}
-							alt={media.alt ?? `${item.name} — ${i + 1}`}
-							width={media.width}
-							height={media.height}
-						/>
-					{:else if media.type === 'image'}
-						<enhanced:img
-							src={media.src}
-							alt={media.alt ?? `${item.name} — ${i + 1}`}
-							class="w-full rounded-lg border border-stone-200"
-							sizes={SHEET_IMAGE_SIZES}
-							loading="lazy"
-							decoding="async"
-						/>
-					{:else}
-						<video
-							src={media.src}
-							class="w-full rounded-lg border border-stone-200"
-							autoplay
-							muted
-							loop
-							playsinline
-							preload="none"
-							aria-label="{item.name} — {i + 1}"
-						></video>
-					{/if}
-				{/each}
-			</article>
-		{/each}
-	</div>
-{/snippet}
 
 <main class="mx-auto max-w-7xl">
 	<div class="group">
@@ -90,26 +37,20 @@
 				<ul class="font-light">
 					<li>
 						<span class="u-didattica">Insegno</span> <span class="u-sviluppo">creative coding</span>
-						<Sheet title="Creative coding">
+						<ContentSheet sheet={abaPerugia}>
 							{#snippet trigger({ props })}
 								<ActionMini {...props} aria-label="Apri esempi creative coding" />
 							{/snippet}
-							{#snippet content()}
-								{@render contentItems(abaPerugia)}
-							{/snippet}
-						</Sheet>
+						</ContentSheet>
 					</li>
 					<li>
 						<span class="u-graphic-design">Visualizzo</span>
 						<span class="u-architettura">concetti</span>
-						<Sheet title="Concetti">
+						<ContentSheet sheet={conceptsUni}>
 							{#snippet trigger({ props })}
 								<ActionMini {...props} aria-label="Apri galleria concetti" />
 							{/snippet}
-							{#snippet content()}
-								{@render contentItems(conceptsUni)}
-							{/snippet}
-						</Sheet>
+						</ContentSheet>
 					</li>
 				</ul>
 			</li>
@@ -132,26 +73,20 @@
 			<li>
 				<span class="u-didattica">Insegno</span> <span class="u-sviluppo">programmazione</span> in
 				workshop in giro per l'Italia
-				<Sheet title="Workshop">
+				<ContentSheet sheet={workshops}>
 					{#snippet trigger({ props })}
 						<ActionMini {...props} aria-label="Apri elenco workshop" />
 					{/snippet}
-					{#snippet content()}
-						{@render contentItems(workshops)}
-					{/snippet}
-				</Sheet>
+				</ContentSheet>
 			</li>
 			<li>
 				Ho <span class="u-ui-ux-design">progettato</span> una
 				<span class="u-architettura">dashboard</span>
-				<Sheet title="Restor">
+				<ContentSheet sheet={restor}>
 					{#snippet trigger({ props })}
 						<ActionMini {...props} aria-label="Apri galleria dashboard Restor" />
 					{/snippet}
-					{#snippet content()}
-						{@render contentItems(restor)}
-					{/snippet}
-				</Sheet>
+				</ContentSheet>
 				per <LinkMini href="https://restor.eco/">Restor, una ONG Svizzera</LinkMini>
 			</li>
 		</ul>
