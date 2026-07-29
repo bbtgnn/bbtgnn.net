@@ -134,7 +134,7 @@
 		@apply bg-background text-foreground;
 	}
 	html {
-		@apply font-sans md:text-lg;
+		@apply font-sans text-lg;
 	}
 }
 
