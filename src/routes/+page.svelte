@@ -36,7 +36,8 @@
 				</p>
 				<ul class="font-light">
 					<li>
-						<span class="u-didattica">Insegno</span> <span class="u-sviluppo">creative coding</span>
+						<span class="u-didattica">Insegno</span>
+						<span class="u-sviluppo">creative coding e AI</span>
 						<ContentSheet sheet={abaPerugia}>
 							{#snippet trigger({ props })}
 								<ActionMini {...props} aria-label="Apri esempi creative coding" />

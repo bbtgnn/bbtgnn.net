@@ -3,13 +3,15 @@ import codingIntroduction from './coding-introduction.svg';
 import web from './web.mp4';
 
 const conceptsUni: ContentSheet = {
-	title: 'Concetti',
-	description: 'Visualizzazioni didattiche di concetti di programmazione e web.',
+	title: 'Spiegazioni visuali',
+	description:
+		'Realizzo diagrammi e animazioni per rendere più accessibili concetti di programmazione e web',
 	items: [
 		{
-			name: 'Coding introduction',
+			name: 'Introduzione alla programmazione',
 			anno: 2024,
-			description: 'Visualizzazione dei concetti introduttivi alla programmazione.',
+			description:
+				'Scomposizione dei principi fondamentali della programmazione: scrittura, variabili, funzioni',
 			media: [
 				{
 					type: 'image-with-zoom',
@@ -21,9 +23,10 @@ const conceptsUni: ContentSheet = {
 			]
 		},
 		{
-			name: 'Web',
+			name: 'Client e server',
 			anno: 2024,
-			description: 'Visualizzazione dei concetti fondamentali del web.',
+			description:
+				'Animazione che spiega la comunicazione tra client e server per il caricamento di una pagina web',
 			media: [
 				{
 					type: 'video',

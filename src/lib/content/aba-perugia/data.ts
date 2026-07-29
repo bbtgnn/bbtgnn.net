@@ -5,8 +5,9 @@ import tool1 from './tool-1-9715.mp4';
 import tool2 from './tool-2-9714.mp4';
 
 const abaPerugia: ContentSheet = {
-	title: 'Creative coding',
-	description: 'Esempi di siti e tool realizzati dagli studenti in corso di creative coding.',
+	title: 'ABA Perugia - Creative coding e AI',
+	description:
+		"I seguenti progetti sono stati realizzati dai miei studenti senza alcuna esperienza pregressa nel codice. Hanno guidato l'IA in tutte le fasi del progetto.",
 	items: [
 		{
 			name: 'Tracce minori',

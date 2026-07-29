@@ -22,8 +22,8 @@
 	<Sheet.Content
 		side="right"
 		class={[
-			'overflow-hidden',
-			'data-[side=right]:w-3/4 data-[side=right]:sm:max-w-[62.5rem]',
+			'overflow-y-auto',
+			'data-[side=right]:w-3/4 data-[side=right]:sm:max-w-250',
 			'duration-300 ease-out',
 			'data-open:fade-in-100 data-[side=right]:data-open:slide-in-from-right',
 			'data-closed:fade-out-100 data-[side=right]:data-closed:slide-out-to-right'
@@ -40,15 +40,20 @@
 			}
 		}}
 	>
-		<Sheet.Header class="min-h-0 flex-1 overflow-y-auto">
+		<Sheet.Header class="gap-0 p-4 sm:p-8">
 			{#if title}
-				<Sheet.Title>{title}</Sheet.Title>
+				<Sheet.Title class="tracking-normal normal-case">{title}</Sheet.Title>
 			{/if}
 			{#if description}
-				<Sheet.Description>{description}</Sheet.Description>
+				<Sheet.Description class="mt-0 leading-normal text-foreground">
+					{description}
+				</Sheet.Description>
 			{/if}
-			{@render content?.()}
 		</Sheet.Header>
+
+		<div class="p-4 pt-0! sm:p-8">
+			{@render content?.()}
+		</div>
 	</Sheet.Content>
 </Sheet.Root>
 
