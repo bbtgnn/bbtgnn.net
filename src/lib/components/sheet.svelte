@@ -23,7 +23,7 @@
 		side="right"
 		class={[
 			'overflow-y-auto',
-			'data-[side=right]:w-3/4 data-[side=right]:sm:max-w-250',
+			'data-[side=right]:w-full data-[side=right]:sm:w-3/4 data-[side=right]:sm:max-w-250',
 			'duration-300 ease-out',
 			'data-open:fade-in-100 data-[side=right]:data-open:slide-in-from-right',
 			'data-closed:fade-out-100 data-[side=right]:data-closed:slide-out-to-right'

@@ -3,7 +3,7 @@ import codingIntroduction from './coding-introduction.svg';
 import web from './web.mp4';
 
 const conceptsUni: ContentSheet = {
-	title: 'Spiegazioni visuali',
+	title: 'ABA Perugia - Spiegazioni visuali',
 	description:
 		'Realizzo diagrammi e animazioni per rendere più accessibili concetti di programmazione e web',
 	items: [
