@@ -18,35 +18,40 @@
 		{/if}
 		<span class="text-muted-foreground"> · {item.anno}</span>
 	</p>
-	<p class="mb-2">{item.description}</p>
-	{#each item.media ?? [] as media, i (mediaSrcKey(media))}
-		{#if media.type === 'image-with-zoom'}
-			<MediaImage
-				src={media.src}
-				alt={media.alt ?? `${item.name} — ${i + 1}`}
-				width={media.width}
-				height={media.height}
-			/>
-		{:else if media.type === 'image'}
-			<enhanced:img
-				src={media.src}
-				alt={media.alt ?? `${item.name} — ${i + 1}`}
-				class="w-full rounded-lg border border-stone-200"
-				sizes={SHEET_IMAGE_SIZES}
-				loading="lazy"
-				decoding="async"
-			/>
-		{:else}
-			<video
-				src={media.src}
-				class="w-full rounded-lg border border-stone-200"
-				autoplay
-				muted
-				loop
-				playsinline
-				preload="none"
-				aria-label="{item.name} — {i + 1}"
-			></video>
-		{/if}
-	{/each}
+	{#if item.description}
+		<p>{item.description}</p>
+	{/if}
+
+	<div class="mt-2">
+		{#each item.media ?? [] as media, i (mediaSrcKey(media))}
+			{#if media.type === 'image-with-zoom'}
+				<MediaImage
+					src={media.src}
+					alt={media.alt ?? `${item.name} — ${i + 1}`}
+					width={media.width}
+					height={media.height}
+				/>
+			{:else if media.type === 'image'}
+				<enhanced:img
+					src={media.src}
+					alt={media.alt ?? `${item.name} — ${i + 1}`}
+					class="w-full rounded-lg border border-stone-200"
+					sizes={SHEET_IMAGE_SIZES}
+					loading="lazy"
+					decoding="async"
+				/>
+			{:else}
+				<video
+					src={media.src}
+					class="w-full rounded-lg border border-stone-200"
+					autoplay
+					muted
+					loop
+					playsinline
+					preload="none"
+					aria-label="{item.name} — {i + 1}"
+				></video>
+			{/if}
+		{/each}
+	</div>
 </article>

@@ -3,14 +3,12 @@ import dashboard1 from './dashboard-1.svg';
 import dashboard2 from './dashboard-2.svg';
 
 const restor: ContentSheet = {
-	title: 'Restor',
-	description: 'Dashboard progettata per Restor, una ONG Svizzera.',
+	title: 'Dashboard Restor',
+	description: 'Dashboard progettata per Restor, una ONG Svizzera che si occupa di riforestazione.',
 	items: [
 		{
-			name: 'Dashboard',
-			anno: 2024,
-			url: 'https://restor.eco/',
-			description: 'Dashboard progettata per Restor, una ONG Svizzera.',
+			name: 'Dashboard design',
+			anno: 2021,
 			media: [
 				{
 					type: 'image-with-zoom',

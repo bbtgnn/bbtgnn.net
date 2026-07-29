@@ -18,7 +18,7 @@ export type ContentItem = {
 	name: string;
 	anno: number;
 	url?: string;
-	description: string;
+	description?: string;
 	media?: MediaItem[];
 };
 
