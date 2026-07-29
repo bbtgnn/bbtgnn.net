@@ -139,8 +139,20 @@
 }
 
 @layer utilities {
-	.media-loading {
+	.media-surface {
 		background-color: var(--color-stone-100);
+	}
+
+	.media-surface :is(img, video) {
+		opacity: 0;
+		transition: opacity 0.45s ease;
+	}
+
+	.media-surface:not(.media-loading) :is(img, video) {
+		opacity: 1;
+	}
+
+	.media-loading {
 		background-image: linear-gradient(
 			100deg,
 			transparent 20%,
@@ -165,6 +177,10 @@
 		.media-loading {
 			animation: none;
 			background-image: none;
+		}
+
+		.media-surface :is(img, video) {
+			transition: none;
 		}
 	}
 }

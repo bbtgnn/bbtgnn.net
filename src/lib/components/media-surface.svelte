@@ -14,19 +14,27 @@
 	let loaded = $state(false);
 
 	function markLoaded() {
+		if (loaded) return;
 		loaded = true;
+	}
+
+	/** Wait two frames so opacity:0 paints before the fade starts (cached media). */
+	function markLoadedAfterPaint() {
+		requestAnimationFrame(() => {
+			requestAnimationFrame(markLoaded);
+		});
 	}
 
 	const checkCached: Attachment = (node) => {
 		for (const img of node.querySelectorAll('img')) {
 			if (img.complete && img.naturalWidth > 0) {
-				markLoaded();
+				markLoadedAfterPaint();
 				return;
 			}
 		}
 		for (const video of node.querySelectorAll('video')) {
 			if (video.readyState >= HTMLMediaElement.HAVE_CURRENT_DATA) {
-				markLoaded();
+				markLoadedAfterPaint();
 				return;
 			}
 		}
