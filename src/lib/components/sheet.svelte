@@ -18,7 +18,15 @@
 		{/snippet}
 	</Sheet.Trigger>
 
-	<Sheet.Content side="bottom" class="data-[side=bottom]:h-[calc(100vh-2rem)]">
+	<Sheet.Content
+		side="bottom"
+		class={[
+			'rounded-t-xl data-[side=bottom]:h-[calc(100vh-2rem)]',
+			'duration-300 ease-out',
+			'data-open:fade-in-100 data-[side=bottom]:data-open:slide-in-from-bottom',
+			'data-closed:fade-out-100 data-[side=bottom]:data-closed:slide-out-to-bottom'
+		]}
+	>
 		<Sheet.Header>
 			{#if title}
 				<Sheet.Title>{title}</Sheet.Title>

@@ -1,6 +1,29 @@
 <script lang="ts">
 	import LinkMini from '$lib/components/link-mini.svelte';
+	import PhotoSwipeGallery, {
+		type Image
+	} from '$lib/components/photo-swipe-gallery.svelte';
 	import Sheet from '$lib/components/sheet.svelte';
+	import codingIntroduction from '$lib/content/concepts-uni/coding-introduction.svg';
+	import web from '$lib/content/concepts-uni/web.gif';
+	import { ArrowUpRight } from '@lucide/svelte';
+
+	const conceptsUniImages: Image[] = [
+		{
+			src: codingIntroduction,
+			width: 3816,
+			height: 3504,
+			alt: 'Coding introduction',
+			caption: 'Coding introduction'
+		},
+		{
+			src: web,
+			width: 960,
+			height: 623,
+			alt: 'Web',
+			caption: 'Web'
+		}
+	];
 </script>
 
 <main>
@@ -36,6 +59,17 @@
 					<li>
 						<span class="u-graphic-design">Visualizzo</span>
 						<span class="u-architettura">concetti</span>
+						<PhotoSwipeGallery images={conceptsUniImages}>
+							{#snippet trigger({ props })}
+								<button
+									{...props}
+									class="-ml-1 inline-flex h-4 w-5 items-center justify-center rounded-full bg-secondary text-foreground hover:bg-accent"
+									aria-label="Apri galleria concetti"
+								>
+									<ArrowUpRight size={12} />
+								</button>
+							{/snippet}
+						</PhotoSwipeGallery>
 					</li>
 				</ul>
 			</li>
@@ -128,21 +162,5 @@
 	.u-graphic-design {
 		--u-color: var(--color-graphic-design);
 		@apply underline decoration-graphic-design;
-	}
-
-	li[class*='u-'] {
-		list-style: none;
-		position: relative;
-	}
-
-	li[class*='u-']::before {
-		content: '';
-		position: absolute;
-		left: -0.875rem;
-		top: 0.55em;
-		width: 0.375rem;
-		height: 0.375rem;
-		border-radius: 9999px;
-		background-color: var(--u-color);
 	}
 </style>
