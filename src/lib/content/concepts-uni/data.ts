@@ -1,6 +1,6 @@
 import type { ContentItem } from '$lib/content/types';
 import codingIntroduction from './coding-introduction.svg';
-import web from './web.gif';
+import web from './web.mp4';
 
 const conceptsUni: ContentItem[] = [
 	{
@@ -23,9 +23,8 @@ const conceptsUni: ContentItem[] = [
 		description: 'Visualizzazione dei concetti fondamentali del web.',
 		media: [
 			{
-				type: 'image',
-				src: web,
-				alt: 'Web'
+				type: 'video',
+				src: web
 			}
 		]
 	}

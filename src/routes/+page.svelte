@@ -36,6 +36,8 @@
 							src={media.src}
 							alt={media.alt ?? `${item.name} — ${i + 1}`}
 							class="w-full rounded-lg border border-stone-200"
+							loading="lazy"
+							decoding="async"
 						/>
 					{:else}
 						<video
@@ -45,6 +47,7 @@
 							muted
 							loop
 							playsinline
+							preload="none"
 							aria-label="{item.name} — {i + 1}"
 						></video>
 					{/if}

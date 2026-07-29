@@ -1,7 +1,7 @@
 import type { ContentItem } from '$lib/content/types';
 import assetIndex from './asset-index.webp';
-import assetTrackingHero from './asset-tracking-hero.jpg';
-import typeAndCode from './IMG_4200.jpg';
+import assetTrackingHero from './asset-tracking-hero.webp';
+import typeAndCode from './IMG_4200.webp';
 import warmUp from './warmup.mp4';
 import tcvideo from './type-coding-video.mp4';
 import saad1 from './saad.jpg';

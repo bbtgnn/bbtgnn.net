@@ -42,7 +42,7 @@
 </script>
 
 <div class={['relative overflow-hidden rounded-lg border border-stone-200', className]}>
-	<img {src} {alt} class="w-full" />
+	<img {src} {alt} class="w-full" loading="lazy" decoding="async" />
 	<div class="absolute right-2 bottom-2">
 		<button
 			type="button"
