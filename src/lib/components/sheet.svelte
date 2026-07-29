@@ -40,7 +40,7 @@
 			}
 		}}
 	>
-		<Sheet.Header class="gap-0 p-4 sm:p-8">
+		<Sheet.Header class="gap-0 p-4 pb-8! sm:p-8">
 			{#if title}
 				<Sheet.Title class="tracking-normal normal-case">{title}</Sheet.Title>
 			{/if}

@@ -15,6 +15,7 @@
 		alt,
 		width,
 		height,
+		zoomSrc: zoomSrcProp,
 		zoomVariant = 'default',
 		class: className
 	}: {
@@ -22,13 +23,17 @@
 		alt: string;
 		width: number;
 		height: number;
+		/** Full-resolution URL for the lightbox; defaults to the preview `src`. */
+		zoomSrc?: string;
 		zoomVariant?: 'default' | 'prominent';
 		class?: ClassValue;
 	} = $props();
 
-	const zoomSrc = $derived(isPicture(src) ? src.img.src : src);
-	const zoomWidth = $derived(isPicture(src) ? src.img.w : width);
-	const zoomHeight = $derived(isPicture(src) ? src.img.h : height);
+	const zoomSrc = $derived(
+		zoomSrcProp ?? (isPicture(src) ? src.img.src : src)
+	);
+	const zoomWidth = $derived(isPicture(src) && !zoomSrcProp ? src.img.w : width);
+	const zoomHeight = $derived(isPicture(src) && !zoomSrcProp ? src.img.h : height);
 	const zoomButtonClass = $derived(
 		zoomVariant === 'prominent'
 			? 'inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-full bg-foreground text-background hover:opacity-80'
