@@ -1,47 +1,54 @@
 <script lang="ts">
+	import ActionMini from '$lib/components/action-mini.svelte';
 	import LinkMini from '$lib/components/link-mini.svelte';
-	import PhotoSwipeGallery, { type Image } from '$lib/components/photo-swipe-gallery.svelte';
+	import MediaImage from '$lib/components/media-image.svelte';
 	import Sheet from '$lib/components/sheet.svelte';
-	import codingIntroduction from '$lib/content/concepts-uni/coding-introduction.svg';
-	import web from '$lib/content/concepts-uni/web.gif';
-	import dashboard1 from '$lib/content/restor/dashboard-1.svg';
-	import dashboard2 from '$lib/content/restor/dashboard-2.svg';
-	import { ArrowUpRight } from '@lucide/svelte';
-
-	const conceptsUniImages: Image[] = [
-		{
-			src: codingIntroduction,
-			width: 3816,
-			height: 3504,
-			alt: 'Coding introduction',
-			caption: 'Coding introduction'
-		},
-		{
-			src: web,
-			width: 960,
-			height: 623,
-			alt: 'Web',
-			caption: 'Web'
-		}
-	];
-
-	const restorImages: Image[] = [
-		{
-			src: dashboard1,
-			width: 1440,
-			height: 900,
-			alt: 'Restor dashboard 1',
-			caption: 'Restor dashboard 1'
-		},
-		{
-			src: dashboard2,
-			width: 1440,
-			height: 900,
-			alt: 'Restor dashboard 2',
-			caption: 'Restor dashboard 2'
-		}
-	];
+	import abaPerugia from '$lib/content/aba-perugia/data';
+	import conceptsUni from '$lib/content/concepts-uni/data';
+	import restor from '$lib/content/restor/data';
+	import type { ContentItem } from '$lib/content/types';
+	import workshops from '$lib/content/workshops/data';
 </script>
+
+{#snippet contentItems(items: ContentItem[])}
+	<div class="space-y-8">
+		{#each items as item (`${item.name}-${item.anno}`)}
+			<article class="space-y-3">
+				<p>
+					{#if item.url}
+						<LinkMini href={item.url}>{item.name}</LinkMini>
+					{:else}
+						{item.name}
+					{/if}
+					<span class="text-muted-foreground"> · {item.anno}</span>
+				</p>
+				<p>{item.description}</p>
+				{#each item.media ?? [] as media, i (media.src)}
+					{#if media.type === 'image-with-zoom'}
+						<MediaImage
+							src={media.src}
+							alt={media.alt ?? `${item.name} — ${i + 1}`}
+							width={media.width}
+							height={media.height}
+						/>
+					{:else if media.type === 'image'}
+						<img src={media.src} alt={media.alt ?? `${item.name} — ${i + 1}`} class="w-full" />
+					{:else}
+						<video
+							src={media.src}
+							class="w-full"
+							autoplay
+							muted
+							loop
+							playsinline
+							aria-label="{item.name} — {i + 1}"
+						></video>
+					{/if}
+				{/each}
+			</article>
+		{/each}
+	</div>
+{/snippet}
 
 <main>
 	<div class="group">
@@ -72,21 +79,26 @@
 				<ul>
 					<li>
 						<span class="u-didattica">Insegno</span> <span class="u-sviluppo">creative coding</span>
+						<Sheet title="Creative coding">
+							{#snippet trigger({ props })}
+								<ActionMini {...props} aria-label="Apri esempi creative coding" />
+							{/snippet}
+							{#snippet content()}
+								{@render contentItems(abaPerugia)}
+							{/snippet}
+						</Sheet>
 					</li>
 					<li>
 						<span class="u-graphic-design">Visualizzo</span>
 						<span class="u-architettura">concetti</span>
-						<PhotoSwipeGallery images={conceptsUniImages}>
+						<Sheet title="Concetti">
 							{#snippet trigger({ props })}
-								<button
-									{...props}
-									class="-ml-1 inline-flex h-4 w-5 items-center justify-center rounded-full bg-secondary text-foreground hover:bg-accent"
-									aria-label="Apri galleria concetti"
-								>
-									<ArrowUpRight size={12} />
-								</button>
+								<ActionMini {...props} aria-label="Apri galleria concetti" />
 							{/snippet}
-						</PhotoSwipeGallery>
+							{#snippet content()}
+								{@render contentItems(conceptsUni)}
+							{/snippet}
+						</Sheet>
 					</li>
 				</ul>
 			</li>
@@ -96,7 +108,7 @@
 					<li>
 						<span class="u-ui-ux-design">Progetto</span> e <span class="u-sviluppo">sviluppo</span>
 						<LinkMini href="https://credimi.io/">Credimi</LinkMini>
-						e <LinkMini href="https://attesta.io/">Attesta</LinkMini>
+						e <LinkMini href="https://attesta.apps.forkbomb.eu/">Attesta</LinkMini>
 					</li>
 				</ul>
 			</li>
@@ -108,18 +120,27 @@
 		<ul>
 			<li>
 				Ho progettato una dashboard
-				<PhotoSwipeGallery images={restorImages}>
+				<Sheet title="Restor">
 					{#snippet trigger({ props })}
-						<button
-							{...props}
-							class="-ml-1 inline-flex h-4 w-5 items-center justify-center rounded-full bg-secondary text-foreground hover:bg-accent"
-							aria-label="Apri galleria dashboard Restor"
-						>
-							<ArrowUpRight size={12} />
-						</button>
+						<ActionMini {...props} aria-label="Apri galleria dashboard Restor" />
 					{/snippet}
-				</PhotoSwipeGallery>
+					{#snippet content()}
+						{@render contentItems(restor)}
+					{/snippet}
+				</Sheet>
 				per <LinkMini href="https://restor.eco/">Restor, una ONG Svizzera</LinkMini>
+			</li>
+			<li>
+				<span class="u-didattica">Insegno</span> <span class="u-sviluppo">programmazione</span> in
+				workshop in giro per l'Italia
+				<Sheet title="Workshop">
+					{#snippet trigger({ props })}
+						<ActionMini {...props} aria-label="Apri elenco workshop" />
+					{/snippet}
+					{#snippet content()}
+						{@render contentItems(workshops)}
+					{/snippet}
+				</Sheet>
 			</li>
 		</ul>
 	</div>
@@ -157,7 +178,7 @@
 	@reference "./layout.css";
 
 	main {
-		@apply space-y-4 p-4 font-mono;
+		@apply space-y-4 p-4;
 	}
 
 	ul {
