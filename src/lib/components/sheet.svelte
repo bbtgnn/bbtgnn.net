@@ -19,13 +19,25 @@
 	</Sheet.Trigger>
 
 	<Sheet.Content
-		side="bottom"
+		side="right"
 		class={[
-			'rounded-t-xl data-[side=bottom]:h-[calc(100vh-2rem)] overflow-hidden',
+			'overflow-hidden',
+			'data-[side=right]:w-3/4 data-[side=right]:sm:max-w-[62.5rem]',
 			'duration-300 ease-out',
-			'data-open:fade-in-100 data-[side=bottom]:data-open:slide-in-from-bottom',
-			'data-closed:fade-out-100 data-[side=bottom]:data-closed:slide-out-to-bottom'
+			'data-open:fade-in-100 data-[side=right]:data-open:slide-in-from-right',
+			'data-closed:fade-out-100 data-[side=right]:data-closed:slide-out-to-right'
 		]}
+		onInteractOutside={(e) => {
+			// PhotoSwipe mounts outside the dialog; keep the sheet open while it is.
+			if (document.querySelector('.pswp--open')) {
+				e.preventDefault();
+			}
+		}}
+		onEscapeKeydown={(e) => {
+			if (document.querySelector('.pswp--open')) {
+				e.preventDefault();
+			}
+		}}
 	>
 		<Sheet.Header class="min-h-0 flex-1 overflow-y-auto">
 			{#if title}
@@ -35,3 +47,11 @@
 		</Sheet.Header>
 	</Sheet.Content>
 </Sheet.Root>
+
+<style>
+	:global([data-slot='sheet-overlay']) {
+		background: transparent;
+		backdrop-filter: none;
+		-webkit-backdrop-filter: none;
+	}
+</style>
