@@ -1,5 +1,6 @@
 <script lang="ts">
 	import LinkMini from '$lib/components/link-mini.svelte';
+	import Sheet from '$lib/components/sheet.svelte';
 </script>
 
 <main>
@@ -69,6 +70,14 @@
 				>
 					portfolio <span class="u-graphic-design">creative</span>
 					<span class="u-graphic-design">coding</span>
+					<Sheet>
+						{#snippet trigger({ props })}
+							<button {...props}>Open</button>
+						{/snippet}
+						{#snippet content()}
+							<p>Content</p>
+						{/snippet}
+					</Sheet>
 				</LinkMini>
 			</li>
 			<li>

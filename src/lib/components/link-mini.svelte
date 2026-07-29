@@ -14,7 +14,7 @@
 	{@render children?.()}
 	<a
 		class={[
-			'-ml-1 inline-flex h-4 w-5 items-center justify-center rounded-full bg-secondary text-foreground hover:bg-secondary-hover',
+			'-ml-1 inline-flex h-4 w-5 items-center justify-center rounded-full bg-secondary text-foreground hover:bg-accent',
 			className
 		]}
 		{target}
