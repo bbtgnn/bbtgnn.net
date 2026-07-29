@@ -1,0 +1,25 @@
+div:
+  p:
+    it: "Ciao!"
+    en: "Hello!"
+  p:
+    it: "Sono {{my_name}}"
+    en: "I'm {{my_name}}"
+div:
+  p:
+    it: "Mi occupo di:"
+    en: "I do:"
+  ul:
+    li:
+      p:
+        it: "Didattica"
+        en: "Teaching"
+      group:
+        p:
+          it: "Insegno programmazione, creative coding e architettura dell'informazione all'Accademia di Belle Arti di Perugia e in workshop"
+          en: "I teach programming, creative coding and information architecture at the Academy of Fine Arts of Perugia and in workshops"
+        a:
+          href: "/students"
+          it: "Guarda alcuni lavori dei miei studenti"
+          en: "Look at some of my students' work"
+      group

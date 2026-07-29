@@ -1,3 +1,11 @@
 @import 'tailwindcss';
 @plugin '@tailwindcss/forms';
 @plugin '@tailwindcss/typography';
+
+@theme {
+	--color-didattica: theme(--color-lime-400);
+	--color-architettura: theme(--color-orange-400);
+	--color-sviluppo: theme(--color-sky-400);
+	--color-graphic-design: theme(--color-purple-400);
+	--color-ui-ux-design: theme(--color-pink-400);
+}
