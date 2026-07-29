@@ -21,13 +21,13 @@
 	<Sheet.Content
 		side="bottom"
 		class={[
-			'rounded-t-xl data-[side=bottom]:h-[calc(100vh-2rem)]',
+			'rounded-t-xl data-[side=bottom]:h-[calc(100vh-2rem)] overflow-hidden',
 			'duration-300 ease-out',
 			'data-open:fade-in-100 data-[side=bottom]:data-open:slide-in-from-bottom',
 			'data-closed:fade-out-100 data-[side=bottom]:data-closed:slide-out-to-bottom'
 		]}
 	>
-		<Sheet.Header>
+		<Sheet.Header class="min-h-0 flex-1 overflow-y-auto">
 			{#if title}
 				<Sheet.Title>{title}</Sheet.Title>
 			{/if}
