@@ -6,8 +6,11 @@
 	import abaPerugia from '$lib/content/aba-perugia/data';
 	import conceptsUni from '$lib/content/concepts-uni/data';
 	import restor from '$lib/content/restor/data';
-	import type { ContentItem } from '$lib/content/types';
+	import { mediaSrcKey, type ContentItem } from '$lib/content/types';
 	import workshops from '$lib/content/workshops/data';
+
+	/** Matches sheet content max width (~62.5rem / 1000px). */
+	const SHEET_IMAGE_SIZES = 'min(1000px, 100vw)';
 </script>
 
 {#snippet contentItems(items: ContentItem[])}
@@ -23,7 +26,7 @@
 					<span class="text-muted-foreground"> · {item.anno}</span>
 				</p>
 				<p class="mb-2">{item.description}</p>
-				{#each item.media ?? [] as media, i (media.src)}
+				{#each item.media ?? [] as media, i (mediaSrcKey(media))}
 					{#if media.type === 'image-with-zoom'}
 						<MediaImage
 							src={media.src}
@@ -32,10 +35,11 @@
 							height={media.height}
 						/>
 					{:else if media.type === 'image'}
-						<img
+						<enhanced:img
 							src={media.src}
 							alt={media.alt ?? `${item.name} — ${i + 1}`}
 							class="w-full rounded-lg border border-stone-200"
+							sizes={SHEET_IMAGE_SIZES}
 							loading="lazy"
 							decoding="async"
 						/>

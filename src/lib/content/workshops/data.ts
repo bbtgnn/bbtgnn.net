@@ -1,11 +1,11 @@
 import type { ContentItem } from '$lib/content/types';
-import assetIndex from './asset-index.webp';
-import assetTrackingHero from './asset-tracking-hero.webp';
-import typeAndCode from './IMG_4200.webp';
+import assetIndex from './asset-index.webp?enhanced';
+import assetTrackingHero from './asset-tracking-hero.webp?enhanced';
+import typeAndCode from './IMG_4200.webp?enhanced';
 import warmUp from './warmup.mp4';
 import tcvideo from './type-coding-video.mp4';
-import saad1 from './saad.jpg';
-import saad2 from './saad-2.jpg';
+import saad1 from './saad.jpg?enhanced';
+import saad2 from './saad-2.jpg?enhanced';
 
 const workshops: ContentItem[] = [
 	{
