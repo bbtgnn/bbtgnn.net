@@ -23,6 +23,9 @@ export default defineConfig({
 			emitTsDeclarations: true
 		})
 	],
+	ssr: {
+		noExternal: ['@lucide/svelte']
+	},
 	test: {
 		expect: { requireAssertions: true },
 		projects: [

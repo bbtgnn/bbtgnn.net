@@ -1,14 +1,25 @@
 <script lang="ts">
 	import { ArrowUpRight } from '@lucide/svelte';
+	import type { Snippet } from 'svelte';
+	import type { HTMLAnchorAttributes } from 'svelte/elements';
 
-	type Props = {
-		href: string;
+	type Props = HTMLAnchorAttributes & {
+		children: Snippet;
 	};
 
-	let { href }: Props = $props();
+	let { class: className, target = '_blank', children, ...props }: Props = $props();
 </script>
 
-<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
-<a {href} class="inline-flex">
-	<ArrowUpRight size={12} />
-</a>
+<span>
+	{@render children?.()}
+	<a
+		class={[
+			'-ml-1 inline-flex h-4 w-5 items-center justify-center rounded-full bg-secondary text-foreground hover:bg-secondary-hover',
+			className
+		]}
+		{target}
+		{...props}
+	>
+		<ArrowUpRight size={12} />
+	</a>
+</span>
