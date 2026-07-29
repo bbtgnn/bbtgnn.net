@@ -11,28 +11,21 @@
 		href?: string;
 		[key: string]: unknown;
 	} = $props();
+
+	const classes = $derived([
+		'inline-flex h-4 w-5 items-center justify-center rounded-full bg-stone-200 text-foreground cursor-pointer',
+		'hover:bg-sky-300 transition-colors duration-300 ease-in-out',
+		className
+	]);
 </script>
 
 {#if href}
-	<a
-		class={[
-			'-ml-1 inline-flex h-4 w-5 items-center justify-center rounded-full bg-secondary text-foreground hover:bg-accent',
-			className
-		]}
-		{href}
-		{...props}
-	>
+	<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
+	<a class={classes} {href} {...props}>
 		<ArrowUpRight size={12} />
 	</a>
 {:else}
-	<button
-		class={[
-			'-ml-1 inline-flex h-4 w-5 items-center justify-center rounded-full bg-secondary text-foreground hover:bg-accent',
-			className
-		]}
-		{...props}
-		type="button"
-	>
+	<button class={classes} {...props} type="button">
 		<Eye size={12} />
 	</button>
 {/if}

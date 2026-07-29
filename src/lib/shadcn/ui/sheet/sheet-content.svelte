@@ -7,7 +7,6 @@
 	import type { Snippet } from "svelte";
 	import SheetPortal from "./sheet-portal.svelte";
 	import SheetOverlay from "./sheet-overlay.svelte";
-	import { Button } from "$lib/shadcn/ui/button/index.js";
 	import XIcon from '@lucide/svelte/icons/x';
 	import { cn, type WithoutChildrenOrChild } from "$lib/shadcn/utils.js";
 	import type { ComponentProps } from "svelte";
@@ -44,10 +43,14 @@
 		{#if showCloseButton}
 			<SheetPrimitive.Close data-slot="sheet-close">
 				{#snippet child({ props })}
-					<Button variant="ghost" class="bg-secondary absolute top-4 right-4" size="icon-sm" {...props}>
-						<XIcon  />
+					<button
+						type="button"
+						class="absolute top-4 right-4 inline-flex h-5 w-6 cursor-pointer items-center justify-center rounded-full bg-stone-200 text-foreground transition-colors duration-300 ease-in-out hover:bg-sky-300"
+						{...props}
+					>
+						<XIcon size={14} />
 						<span class="sr-only">Close</span>
-					</Button>
+					</button>
 				{/snippet}
 			</SheetPrimitive.Close>
 		{/if}

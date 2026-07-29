@@ -13,5 +13,5 @@
 
 <span>
 	{@render children?.()}
-	<ActionMini class={className ?? undefined} {target} {...props} />
+	<ActionMini class={['-ml-0.5', className]} {target} {...props} />
 </span>
