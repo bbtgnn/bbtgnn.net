@@ -50,9 +50,8 @@
 		<div class="min-h-0 flex-1 overflow-y-auto" onscroll={onContentScroll}>
 			<Sheet.Header
 				class={[
-					'sticky top-0 z-10 gap-0 bg-popover gutter-x pt-8 pb-4 transition-[border-color] duration-300 ease-out',
-					scrolled ? 'border-b border-stone-200' : 'border-b border-transparent',
-					!description && 'pb-8'
+					'sticky top-0 z-10 gap-0 bg-popover gutter-x pt-8 transition-[border-color,padding-bottom] duration-300 ease-out',
+					scrolled ? 'border-b border-stone-200 pb-3' : 'border-b border-transparent pb-1'
 				]}
 			>
 				{#if title}
