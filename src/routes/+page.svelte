@@ -146,7 +146,7 @@
 	}
 
 	.group > p:first-child {
-		@apply mb-1 font-bold;
+		@apply mb-0.5 font-bold;
 	}
 
 	.u-didattica {
