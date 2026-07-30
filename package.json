@@ -54,6 +54,7 @@
 		"vitest-browser-svelte": "^2.1.1"
 	},
 	"dependencies": {
+		"@fontsource/lato": "^5.3.0",
 		"@fontsource/solway": "^5.3.0",
 		"@lucide/svelte": "^1.27.0",
 		"photoswipe": "^5.4.4"

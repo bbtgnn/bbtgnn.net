@@ -1,11 +1,14 @@
 <script lang="ts">
+	import { page } from '$app/state';
 	import ActionMini from '$lib/components/action-mini.svelte';
 	import ContentSheet from '$lib/components/content-sheet.svelte';
 	import LinkMini from '$lib/components/link-mini.svelte';
 	import { getContentSheets } from '$lib/content';
 	import * as m from '$lib/paraglide/messages';
+	import { getLocaleForUrl } from '$lib/paraglide/runtime';
 
 	const sheets = $derived(getContentSheets());
+	const portfolioFirst = $derived(getLocaleForUrl(page.url.href) !== 'en');
 </script>
 
 <main class="mx-auto max-w-7xl">
@@ -107,9 +110,15 @@
 				<LinkMini
 					href="https://giovanniabbatepaolo.notion.site/458ab8fdff2742bd817fdd6ac820e188?v=cda461a173de48e9b30d487b7f741fd2"
 				>
-					{m.home_more_portfolio()}
-					<span class="u-graphic-design">{m.home_more_creative()}</span>
-					<span class="u-sviluppo">{m.home_more_coding()}</span>
+					{#if portfolioFirst}
+						{m.home_more_portfolio()}
+						<span class="u-graphic-design">{m.home_more_creative()}</span>
+						<span class="u-sviluppo">{m.home_more_coding()}</span>
+					{:else}
+						<span class="u-graphic-design">{m.home_more_creative()}</span>
+						<span class="u-sviluppo">{m.home_more_coding()}</span>
+						{m.home_more_portfolio()}
+					{/if}
 				</LinkMini>
 			</li>
 			<li>
@@ -129,7 +138,7 @@
 	@reference "./layout.css";
 
 	main {
-		@apply space-y-6 p-4;
+		@apply space-y-6 gutter-x py-8;
 	}
 
 	ul {
@@ -137,7 +146,7 @@
 	}
 
 	.group > p:first-child {
-		@apply mb-1 font-bold;
+		@apply mb-0.5 font-bold;
 	}
 
 	.u-didattica {
