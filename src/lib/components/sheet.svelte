@@ -29,7 +29,7 @@
 	<Sheet.Content
 		side="right"
 		class={[
-			'overflow-hidden',
+			'overflow-hidden text-base',
 			'data-[side=right]:w-full data-[side=right]:sm:w-3/4 data-[side=right]:sm:max-w-250',
 			'duration-300 ease-out',
 			'data-open:fade-in-100 data-[side=right]:data-open:slide-in-from-right',
@@ -56,13 +56,15 @@
 				]}
 			>
 				{#if title}
-					<Sheet.Title class="leading-tight tracking-normal normal-case">{title}</Sheet.Title>
+					<Sheet.Title class="text-base leading-tight tracking-normal normal-case">
+						{title}
+					</Sheet.Title>
 				{/if}
 			</Sheet.Header>
 
 			{#if description}
 				<div class="gutter-x pb-8">
-					<Sheet.Description class="mt-0 leading-normal text-foreground">
+					<Sheet.Description class="mt-0 text-base leading-normal text-foreground">
 						{description}
 					</Sheet.Description>
 				</div>
