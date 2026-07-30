@@ -40,7 +40,7 @@
 			}
 		}}
 	>
-		<Sheet.Header class="gap-0 p-4 pb-8! sm:p-8">
+		<Sheet.Header class="gap-0 px-4 py-8 sm:p-8">
 			{#if title}
 				<Sheet.Title class="leading-tight tracking-normal normal-case">{title}</Sheet.Title>
 			{/if}
@@ -51,7 +51,7 @@
 			{/if}
 		</Sheet.Header>
 
-		<div class="p-4 pt-0! sm:p-8">
+		<div class="px-4 pb-8 pt-0! sm:px-8 sm:pb-8">
 			{@render content?.()}
 		</div>
 	</Sheet.Content>
