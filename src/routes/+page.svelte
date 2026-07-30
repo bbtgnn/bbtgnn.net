@@ -129,7 +129,7 @@
 	@reference "./layout.css";
 
 	main {
-		@apply space-y-6 px-4 py-8 sm:p-8;
+		@apply space-y-6 gutter-x py-8;
 	}
 
 	ul {

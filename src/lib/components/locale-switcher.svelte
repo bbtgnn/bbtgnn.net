@@ -72,7 +72,7 @@
 	@reference "../../routes/layout.css";
 
 	.locale-switcher {
-		@apply absolute top-0 right-0 z-10 flex items-center gap-2 px-4 py-8 text-sm sm:p-8;
+		@apply gutter-x absolute top-0 right-0 z-10 flex items-center gap-2 pt-4 pb-8 text-sm sm:py-8;
 	}
 
 	.separator {

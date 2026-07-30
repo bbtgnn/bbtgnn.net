@@ -50,7 +50,7 @@
 		<div class="min-h-0 flex-1 overflow-y-auto" onscroll={onContentScroll}>
 			<Sheet.Header
 				class={[
-					'sticky top-0 z-10 gap-0 bg-popover px-4 pt-8 pb-4 transition-[border-color] duration-200 ease-out sm:px-8',
+					'sticky top-0 z-10 gap-0 bg-popover gutter-x pt-8 pb-4 transition-[border-color] duration-300 ease-out',
 					scrolled ? 'border-b border-stone-200' : 'border-b border-transparent',
 					!description && 'pb-8'
 				]}
@@ -61,14 +61,14 @@
 			</Sheet.Header>
 
 			{#if description}
-				<div class="px-4 pb-8 sm:px-8">
+				<div class="gutter-x pb-8">
 					<Sheet.Description class="mt-0 leading-normal text-foreground">
 						{description}
 					</Sheet.Description>
 				</div>
 			{/if}
 
-			<div class="px-4 pb-8 sm:px-8">
+			<div class="gutter-x pb-8">
 				{@render content?.()}
 			</div>
 		</div>
