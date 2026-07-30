@@ -45,7 +45,7 @@
 				{#snippet child({ props })}
 					<button
 						type="button"
-						class="absolute top-4 right-4 inline-flex h-5 w-6 cursor-pointer items-center justify-center rounded-full bg-stone-200 text-foreground transition-colors duration-300 ease-in-out hover:bg-sky-300"
+						class="absolute top-4 right-4 z-20 inline-flex h-5 w-6 cursor-pointer items-center justify-center rounded-full bg-stone-200 text-foreground transition-colors duration-300 ease-in-out hover:bg-sky-300"
 						{...props}
 					>
 						<XIcon size={14} />

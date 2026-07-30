@@ -10,6 +10,13 @@
 	};
 
 	let { trigger, content, title, description, ...rest }: Props = $props();
+
+	let scrolled = $state(false);
+
+	function onContentScroll(e: Event) {
+		const target = e.currentTarget as HTMLDivElement;
+		scrolled = target.scrollTop > 0;
+	}
 </script>
 
 <Sheet.Root {...rest}>
@@ -22,7 +29,7 @@
 	<Sheet.Content
 		side="right"
 		class={[
-			'overflow-y-auto',
+			'overflow-hidden',
 			'data-[side=right]:w-full data-[side=right]:sm:w-3/4 data-[side=right]:sm:max-w-250',
 			'duration-300 ease-out',
 			'data-open:fade-in-100 data-[side=right]:data-open:slide-in-from-right',
@@ -40,19 +47,30 @@
 			}
 		}}
 	>
-		<Sheet.Header class="gap-0 px-4 py-8 sm:p-8">
-			{#if title}
-				<Sheet.Title class="leading-tight tracking-normal normal-case">{title}</Sheet.Title>
-			{/if}
-			{#if description}
-				<Sheet.Description class="mt-0 leading-normal text-foreground">
-					{description}
-				</Sheet.Description>
-			{/if}
-		</Sheet.Header>
+		<div class="min-h-0 flex-1 overflow-y-auto" onscroll={onContentScroll}>
+			<Sheet.Header
+				class={[
+					'sticky top-0 z-10 gap-0 bg-popover px-4 pt-8 pb-4 transition-[border-color] duration-200 ease-out sm:px-8',
+					scrolled ? 'border-b border-stone-200' : 'border-b border-transparent',
+					!description && 'pb-8'
+				]}
+			>
+				{#if title}
+					<Sheet.Title class="leading-tight tracking-normal normal-case">{title}</Sheet.Title>
+				{/if}
+			</Sheet.Header>
 
-		<div class="px-4 pb-8 pt-0! sm:px-8 sm:pb-8">
-			{@render content?.()}
+			{#if description}
+				<div class="px-4 pb-8 sm:px-8">
+					<Sheet.Description class="mt-0 leading-normal text-foreground">
+						{description}
+					</Sheet.Description>
+				</div>
+			{/if}
+
+			<div class="px-4 pb-8 sm:px-8">
+				{@render content?.()}
+			</div>
 		</div>
 	</Sheet.Content>
 </Sheet.Root>
